@@ -1,0 +1,417 @@
+<template id="fs-person-template">
+
+  <div>
+    <div class="fs-person-vitals__name">
+      <span class="fs-person-vitals__name--split">
+        <span class="fs-person-vitals__name-given">__givenname__</span>
+        <br>
+        <span class="fs-person-vitals__name-family">__familyname__</span>
+      </span>
+      <span class="fs-person-vitals__name-full" data-test="full-name">__fullname__</span>
+    </div>
+    <div class="fs-person-vitals__fs-person-details">
+      <div class="fs-person-details__container">
+        <span class="fs-person-details__lifeSpan" data-test="lifespan">__lifespan__</span>
+        <span class="fs-person-details__separator">&nbsp;•&nbsp;</span>
+        <span class="fs-person-details__id" data-test="pid" lang="en">__pid__</span>
+        <span class="fs-person-details__selection-stopper"></span>
+      </div>
+    </div>
+  </div>
+
+</template>
+
+<script>
+
+  (function() {
+
+    //Reads the cookie for testing purposes.
+    //Remove this code block when native web components get a solution to using FS functions outside of familysearch.org.
+    var readCookie = function(name) {
+      var value = "; " + document.cookie;
+      var parts = value.split("; " + name + "=");
+      if (parts.length == 2) return parts.pop().split(";").shift();
+    };
+
+    //Creates the prototype for the fs-person web component
+    var fsPersonProto = Object.create(HTMLElement.prototype);
+
+    //Selects the template
+    var doc = (document._currentScript || document.currentScript).ownerDocument;
+    var template = doc.querySelector('#fs-person-template');
+
+    /**
+    * Parses string object into JSON
+    *
+    * @private
+    * @param {string} obj - a string containing an object of person data
+    * @return {object} personObj - an object containing person data
+    *
+    * Sample object structure:
+    * (Required keys: "id", "summary", "summary.nameForms", "living", "lifespan")
+    *
+    *  {
+    *      "id": "5XG4-L2Y",
+    *      "summary": {
+    *          "name": "John Doe",
+    *          "nameForms": [
+    *              {
+    *                  "lang": "x-Latn"
+    *              }
+    *          ],
+    *          "living": false,
+    *          "lifespan": "1902–1987",
+    *          "lifespanBegin": {
+    *              "date": {
+    *                  "normalized": [
+    *                      {
+    *                          "value": "31 October 1902"
+    *                      }
+    *                  ]
+    *              }
+    *          },
+    *          "lifespanEnd": {
+    *              "date": {
+    *                  "normalized": [
+    *                      {
+    *                          "value": "2 May 1987"
+    *                      }
+    *                   ]
+    *               }
+    *           }
+    *        },
+    *        "givenName": "John",
+    *        "familyName": "Doe"
+    *  }
+    */
+    fsPersonProto._parsePersonObj = function(obj) {
+
+      var personObj;
+
+      try {
+        personObj = JSON.parse(obj);
+      }
+
+      //Renders the person as "Invalid Person" if there's a problem with the object, and fires the error events
+      catch(error) {
+
+        personObj = {"id":"0000-000","summary":{"name":"Invalid Person","nameForms":[{"lang":"x-Latn"}],"living":false,"lifespan":"0000-0000","lifespanBegin":{"date":{"normalized":[{"lang":"en-US","value":"0000"}]}},"lifespanEnd":{"date":{"normalized":[{"lang":"en-US","value":"0000"}]}}},"fullName":"Invalid Name","givenName":"Invalid","familyName":"Name","error":true};
+
+        this._fireErrorEvents();
+      }
+
+      //Passes the personObj to the _renderPerson function
+      finally {
+        return personObj;
+      }
+    };
+
+    //Fires error events
+    fsPersonProto._fireErrorEvents = function() {
+
+      var fsPersonErrorEvent = new CustomEvent('fs-person-error', {bubbles: true});
+      this.dispatchEvent(fsPersonErrorEvent);
+
+      var errorEvent = new CustomEvent('error', {bubbles: false});
+      this.dispatchEvent(errorEvent);
+    };
+
+    /**
+    * Sets up the web component when a new instance of the element is created
+    */
+    fsPersonProto.createdCallback = function () {
+
+      //Imports the web component's template and adds it to the DOM
+      var clone = document.importNode(template.content, true);
+      this.appendChild(clone);
+
+      var personObj;
+      var textObj;
+      var pid;
+      var fsPerson = this;
+
+      //Getter and setter for the "pid" attribute
+      Object.defineProperty(fsPerson, "pid", {
+        get: function() {
+          return pid;
+        },
+        set: function(value) {
+          this.setAttribute('pid', value);
+        }
+      });
+
+      //Getter and setter for "object" attribute
+      Object.defineProperty(fsPerson, "object", {
+        get: function() {
+          return personObj;
+        },
+        set: function(value) {
+          this.setAttribute('object', value);
+        }
+      });
+
+      //Renders the person when the user passes in a PID
+      if (this.hasAttribute('pid')) {
+
+        pid = this.getAttribute('pid');
+        fsPersonProto.getPerson.call(fsPerson, pid).then(function getPersonSuccess(response){
+          fsPersonProto._renderPerson.call(fsPerson, response);
+        })
+
+        .catch(function(error) {
+          if (error) console.error(error);
+        });
+
+      //Renders the person when the user passes in an object
+      } else if (this.hasAttribute('object')) {
+        textObj = this.getAttribute('object');
+        var parsedObj = this._parsePersonObj(textObj);
+        this._renderPerson(parsedObj);
+
+      //Renders the person as "Invalid Person" if the user doesn't pass in a "pid" or "object" attribute
+      } else {
+        textObj = '{"id":"0000-000","summary":{"name":"Invalid Person","nameForms":[{"lang":"x-Latn"}],"living":false,"lifespan":"0000-0000","lifespanBegin":{"date":{"normalized":[{"lang":"en-US","value":"0000"}]}},"lifespanEnd":{"date":{"normalized":[{"lang":"en-US","value":"0000"}]}}},"fullName":"Invalid Name","givenName":"Invalid","familyName":"Name","error":true}';
+        var parsedObj = this._parsePersonObj(textObj);
+        this._fireErrorEvents();
+        this._renderPerson(parsedObj);
+      }
+    };
+
+    //Retrieves the person's info
+    fsPersonProto.getPerson = function(pid) {
+
+      var self = this;
+
+      return fetch('/tf/person/' + pid, {
+        method: 'GET',
+        headers: new Headers({
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + readCookie('fssessionid')
+        })
+      })
+      .then(function getJson(response) {
+
+        if (response.ok) return response.json();
+
+        return Promise.reject();
+      })
+
+      //If the person's info is invalid, renders the person as "Invalid Person" and fires error events
+      .catch(function (error) {
+        var invalidPersonObj = {"id":"0000-000","summary":{"name":"Invalid Person","nameForms":[{"lang":"x-Latn"}],"living":false,"lifespan":"0000-0000","lifespanBegin":{"date":{"normalized":[{"lang":"en-US","value":"0000"}]}},"lifespanEnd":{"date":{"normalized":[{"lang":"en-US","value":"0000"}]}}},"fullName":"Invalid Name","givenName":"Invalid","familyName":"Name","error":true};
+        invalidPersonObj.id = pid;
+        self._renderPerson(invalidPersonObj);
+
+        if (error) console.error(error);
+
+        self._fireErrorEvents();
+        return Promise.reject();
+      });
+    };
+
+    /**
+    * Renders the person
+    *
+    * @private
+    * @param {object} personObj - an object containing person data
+    */
+    fsPersonProto._renderPerson = function (personObj) {
+
+      //If the object doesn't exist, or has insufficient data, renders the person as "Invalid Person"
+      if (!personObj || !personObj.summary) {
+
+        personObj = {"id":"0000-000","summary":{"name":"Invalid Person","nameForms":[{"lang":"x-Latn"}],"living":false,"lifespan":"0000-0000","lifespanBegin":{"date":{"normalized":[{"lang":"en-US","value":"0000"}]}},"lifespanEnd":{"date":{"normalized":[{"lang":"en-US","value":"0000"}]}}},"fullName":"Invalid Name","givenName":"Invalid","familyName":"Name","error":true}
+
+        this._fireErrorEvents();
+      }
+
+      //Gets the object data
+      pid = (personObj.id || '0000-000');
+      var fullName = personObj.summary.name;
+      var givenName = personObj.givenName;
+      var familyName = personObj.familyName;
+      var lifespan = personObj.summary.lifespan;
+      var alive = personObj.summary.living;
+
+      //Displays "Living" or "Deceased" if the person doesn't have a lifespan
+      if (lifespan === "-") {
+        var ifAlive = (alive) ? "Living" : "Deceased";
+        lifespan = ifAlive;
+      }
+
+      //Displays "Living" or "Deceased" as the death date if the person doesn't have a death date
+      //RegEx checks to see if the last character of the lifespan is a dash
+      var nodeathdate = new RegExp("\-$");
+      if (nodeathdate.test(lifespan)) {
+
+        var ifLiving = (alive) ? lifespan += "Living" : lifespan += "Deceased";
+        lifespan = ifLiving;
+      }
+
+      //Variables for use in lifespans
+      var birthDate;
+      var deathDate;
+
+      //Handles the "longLifespan" attribute functionality
+      var haslongLifespan = this.hasAttribute("longLifespan");
+      if (haslongLifespan) {
+
+        //Sets birth date
+        if (personObj.summary.lifespanBegin.date) {
+          birthDate = personObj.summary.lifespanBegin.date.normalized[0].value;
+        } else {
+          birthDate = "";
+        }
+
+        //Sets death date
+        if (personObj.summary.lifespanEnd.date) {
+          deathDate = personObj.summary.lifespanEnd.date.normalized[0].value;
+
+        } else {
+          var ifNotDead = (alive) ? "Living" : "Deceased";
+          lifespan = ifNotDead;
+        }
+
+        //Sets full lifespan
+        lifespan = birthDate + " – " + deathDate;
+      }
+
+      //RegEx looks for a regular dash and replaces it with an en dash
+      var dashRegex = /-/g;
+      lifespan = lifespan.replace(dashRegex, '–');
+      pid = pid.replace(dashRegex, '–');
+
+      var obj = {
+        givenname: givenName,
+        familyname: familyName,
+        fullname: fullName,
+        lifespan: lifespan,
+        pid: pid
+      };
+
+      //RegEx finds the name, lifespan, and pid (surrounded by double underscores) in the template and replaces them with data instead of placeholders
+      var templateRegex = /__([a-z]+)__/g;
+      this.innerHTML = template.innerHTML.replace(templateRegex, function replaceTemplate(match, p1) {
+          return obj[p1];
+      });
+
+      //Selects the "person details container" for use in "noPid" and "noLifespan" attribute handling
+      var pidLifespanParent = this.querySelector('.fs-person-details__container');
+
+      //Handles the "noPid" attribute functionality
+      var noPid = this.hasAttribute("noPid");
+
+      if (noPid) {
+        pidLifespanParent.removeChild(this.querySelector('.fs-person-details__separator'));
+        pidLifespanParent.removeChild(this.querySelector('.fs-person-details__id'));
+      }
+
+      //Handles the "noLifespan" attribute functionality
+      var noLifespan = this.hasAttribute("noLifespan");
+
+      if (noLifespan) {
+        pidLifespanParent.removeChild(this.querySelector('.fs-person-details__separator'));
+        pidLifespanParent.removeChild(this.querySelector('.fs-person-details__lifeSpan'));
+      }
+
+      //Handles the "noPersonDetails" attribute functionality
+      var personDetailsParent = this.querySelector('.fs-person-vitals__fs-person-details');
+      var noPersonDetails = this.hasAttribute("noPersonDetails");
+
+      if (noPersonDetails) {
+        personDetailsParent.removeChild(this.querySelector('.fs-person-details__container'));
+      }
+
+      //Variables for use in "heading" and "link" attribute handling
+      var nameFull = this.querySelector('.fs-person-vitals__name-full');
+      var nameSplit = this.querySelector('.fs-person-vitals__name--split');
+
+      //Handles the "heading" attribute functionality
+      var heading = this.getAttribute("heading");
+
+      if (heading) {
+        var headingWrapper = document.createElement(heading);
+        nameFull.parentNode.appendChild(headingWrapper);
+        headingWrapper.appendChild(nameFull);
+        nameSplit.parentNode.appendChild(headingWrapper);
+        headingWrapper.appendChild(nameSplit);
+      }
+
+      //Handles the "link" attribute functionality
+      var link = this.getAttribute("link");
+
+      if (link) {
+        var wrapper = document.createElement('a');
+        wrapper.setAttribute('href', link);
+        nameFull.parentNode.appendChild(wrapper);
+        wrapper.appendChild(nameFull);
+        nameSplit.parentNode.appendChild(wrapper);
+        wrapper.appendChild(nameSplit);
+      }
+
+      //Renders the person's info
+      var personInfo;
+
+      if (lifespan) {
+        personInfo = fullName + '\n' + lifespan + ' • ' + pid;
+      } else {
+        personInfo = fullName + '\n' + lifespan + pid;
+        this.querySelector('.fs-person-details__separator').style.display = "none";
+      }
+
+      //(Stacked View) If the person doesn't have a given name, remove the <br> tag
+      if (!givenName) this.querySelector('br').style.display = "none";
+
+      //(Stacked View) Handles partial data
+      if (!givenName) this.querySelector('.fs-person-vitals__name-given').style.display = 'none';
+      if (!familyName) this.querySelector('.fs-person-vitals__name-family').style.display = 'none';
+
+      //Allows screenreaders to determine language
+      this.querySelector('.fs-person-vitals__name').setAttribute('lang', personObj.summary.nameForms[0].lang);
+
+      //Wraps the fs-person element in a "title" attribute
+      this.setAttribute('title', personInfo);
+
+      //Fires load events
+      var fsPersonLoadEvent = new CustomEvent('fs-person-load', {bubbles: true});
+      this.dispatchEvent(fsPersonLoadEvent);
+
+      var LoadEvent = new CustomEvent('load', {bubbles: false});
+      this.dispatchEvent(LoadEvent);
+
+    };
+
+    /**
+    * Handles attribute changes
+    *
+    * @param {string} attrName - name of attribute
+    * @param {string} oldValue - old value of the attribute
+    * @param {string} newValue - new value of the attribute
+    */
+    fsPersonProto.attributeChangedCallback = function (attrName, oldValue, newValue) {
+      var self = this;
+      var newPersonObj;
+
+      //Handles "pid" attribute changes
+      if (attrName === 'pid') {
+        newPersonObj = this.getPerson(newValue).then(function getPersonSuccess(response){
+            self._renderPerson(response);
+        })
+        .catch (function (error) {
+          if (error) console.error(error);
+        });
+      }
+
+      //Handles "object" attribute changes
+      if (attrName === 'object') {
+        newPersonObj = this._parsePersonObj(newValue);
+        this._renderPerson(newPersonObj);
+      }
+    };
+
+    //Registers the web component in the DOM
+    document.registerElement('fs-person', {prototype: fsPersonProto});
+
+    })();
+
+</script>

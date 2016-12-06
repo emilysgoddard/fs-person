@@ -1,0 +1,632 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="../../../components/webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../../components/web-component-tester/browser.js"></script>
+  <script src="../../../components/fetch/fetch.js"></script>
+  <script src="../../../components/fetch-mock/index.js"></script>
+  <link rel="import" href="../fs-person.html">
+</head>
+<body>
+
+  <script>
+
+  var testObject = {"id":"LV8K-G8L","summary":{"spaceId":"MMMM-MMM","name":"Myrtle Rost","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","parts":[{"type":"http://gedcomx.org/Given","value":"Myrtle"},{"type":"http://gedcomx.org/Surname","value":"Rost"}],"ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":false,"lifespan":"1916-2007","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"2 February 1916","normalized":[{"lang":"en-US","value":"2 February 1916"},{"value":"2 February 1916"}],"formal":"+1916-02-02"}},"lifespanEnd":{"type":"http://gedcomx.org/Death","date":{"original":"16 November 2007","normalized":[{"lang":"en-US","value":"16 November 2007"},{"value":"16 November 2007"}],"formal":"+2007-11-16"}},"tombstoned":false,"notesCount":0},"name":{"value":{"type":"http://gedcomx.org/BirthName","ctStyle":"EUROTYPIC","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","parts":[{"type":"http://gedcomx.org/Given","value":"Myrtle"},{"type":"http://gedcomx.org/Surname","value":"Rost"}],"ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}]},"commandUuid":"80a47ea0-b025-11e4-bf99-01c83f377bc8","valueHash":"10531c321088dcad5cffbd559a814159b3bfdc63@v7"},"fullName":"Myrtle Rost","givenName":"Myrtle","familyName":"Rost","deletable":false};
+  var testStringObject = '{"id":"LV8K-G8L","summary":{"spaceId":"MMMM-MMM","name":"Myrtle Rost","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","parts":[{"type":"http://gedcomx.org/Given","value":"Myrtle"},{"type":"http://gedcomx.org/Surname","value":"Rost"}],"ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":false,"lifespan":"1916-2007","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"2 February 1916","normalized":[{"lang":"en-US","value":"2 February 1916"},{"value":"2 February 1916"}],"formal":"+1916-02-02"}},"lifespanEnd":{"type":"http://gedcomx.org/Death","date":{"original":"16 November 2007","normalized":[{"lang":"en-US","value":"16 November 2007"},{"value":"16 November 2007"}],"formal":"+2007-11-16"}},"tombstoned":false,"notesCount":0},"name":{"value":{"type":"http://gedcomx.org/BirthName","ctStyle":"EUROTYPIC","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","parts":[{"type":"http://gedcomx.org/Given","value":"Myrtle"},{"type":"http://gedcomx.org/Surname","value":"Rost"}],"ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}]},"commandUuid":"80a47ea0-b025-11e4-bf99-01c83f377bc8","valueHash":"10531c321088dcad5cffbd559a814159b3bfdc63@v7"},"fullName":"Myrtle Rost","givenName":"Myrtle","familyName":"Rost","deletable":false}';
+  var nonEnglishStringObj = '{"id":"9FSG-WFM","version":136556381473380000,"lastModified":1436345347338,"summary":{"spaceId":"MMMM-MMM","name":"鮑昌夫人","nameForms":[{"lang":"und-Hani","fullText":"鮑昌夫人","parts":[{"type":"http://gedcomx.org/Surname","value":"鮑"},{"type":"http://gedcomx.org/Given","value":"昌夫人"}],"ctScript":"CHINESE","langtag":"und-Hani","order":"SINOTYPIC","separator":""}],"gender":"FEMALE","living":false,"lifespan":"0730-","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"Abt 0730","normalized":[{"lang":"en-US","value":"0730"},{"value":"0730"}],"ctModifier":"ABOUT","formal":"A+0730"},"place":{"original":"中國","names":[{"lang":"en-US","value":"China"},{"lang":"und","value":"China"}]}},"lifespanEnd":{"type":"http://gedcomx.org/Death","place":{"original":"中國","names":[{"lang":"en-US","value":"China"},{"lang":"und","value":"China"}]}},"tombstoned":false,"readOnly":false,"sourcesCount":0,"discussionsCount":0,"notesCount":0},"name":{"schemaVersion":"1.0.0","conclusionType":"NAME","preferred":true,"value":{"type":"http://gedcomx.org/BirthName","ctStyle":"SINOTYPIC","nameForms":[{"lang":"und-Hani","fullText":"鮑昌夫人","parts":[{"type":"http://gedcomx.org/Surname","value":"鮑"},{"type":"http://gedcomx.org/Given","value":"昌夫人"}],"ctScript":"CHINESE","langtag":"und-Hani","order":"SINOTYPIC","separator":""}]},"conclusionId":"ddfa08c7-905a-4cbf-b994-9d4514d2af50","ctConclusionId":"V.777-777N","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMWK-242"},"submitter":{"id":"MMWK-242"},"modified":"1340321906576","modifiedDateNormalized":[{"lang":"en-US","value":"21 June 2012"}]},"commandUuid":"32c42900-bbfa-11e1-9046-019718f9bcb0","valueHash":"b770a07d657d109f94577bc36c57004e252d423d@v7"},"alternateNames":[{"schemaVersion":"1.0.0","conclusionType":"NAME","preferred":false,"value":{"type":"http://gedcomx.org/BirthName","ctStyle":"SINOTYPIC","nameForms":[{"lang":"und-Hani","fullText":"鮑昌夫人","parts":[{"type":"http://gedcomx.org/Surname","value":"鮑"},{"type":"http://gedcomx.org/Given","value":"昌夫人"}],"ctScript":"CHINESE","langtag":"und-Hani","order":"SINOTYPIC","separator":""},{"lang":"und","fullText":"MRS. BAO CHANG","parts":[{"type":"http://gedcomx.org/Surname","value":"MRS. BAO CHANG"}],"ctScript":"UNSPECIFIED","langtag":"x-Latn","order":"SINOTYPIC","separator":" "}]},"conclusionId":"0ca3ae4f-95c7-4dfa-bd6c-7be6d049400e","ctConclusionId":"N.777-777P","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM8"},"submitter":{"id":"MMMM-MM8"},"modified":"1340321906576","modifiedDateNormalized":[{"lang":"en-US","value":"21 June 2012"}]},"commandUuid":"32c42900-bbfa-11e1-9046-019718f9bcb0","valueHash":"04731e1acebd8aa632d306ebaee0ba8450f8adaa@v7"},{"schemaVersion":"1.0.0","conclusionType":"NAME","preferred":false,"value":{"type":"http://gedcomx.org/AlsoKnownAs","ctStyle":"EUROTYPIC","nameForms":[{"lang":"und","fullText":"MRS. BAO CHANG","parts":[{"type":"http://gedcomx.org/Surname","value":"MRS. BAO CHANG"}],"ctScript":"UNSPECIFIED","langtag":"und","order":"EUROTYPIC","separator":" "}]},"conclusionId":"970ee2de-e481-4fa0-a7c8-bf4b3b3e24b7","ctConclusionId":"N.777-7774","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMWK-242"},"submitter":{"id":"MMWK-242"},"modified":"1340321906576","modifiedDateNormalized":[{"lang":"en-US","value":"21 June 2012"}]},"commandUuid":"32c42900-bbfa-11e1-9046-019718f9bcb0","valueHash":"238f42611f500cad720ba56c52b110d0427296ef@v7"},{"schemaVersion":"1.0.0","conclusionType":"NAME","preferred":false,"value":{"type":"http://gedcomx.org/BirthName","ctStyle":"SINOTYPIC","nameForms":[{"lang":"und-Hani","fullText":"鮑昌夫人","parts":[{"type":"http://gedcomx.org/Surname","value":"鮑"},{"type":"http://gedcomx.org/Given","value":"昌"},{"type":"http://gedcomx.org/Suffix","value":"夫人"}],"ctScript":"CHINESE","langtag":"und-Hani","order":"SINOTYPIC","separator":""}]},"conclusionId":"c9075aec-0093-4635-8218-b4b05b7e90a8","ctConclusionId":"N.777-7771","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MMC"},"submitter":{"id":"MMMM-MMC"},"modified":"1364906772028","modifiedDateNormalized":[{"lang":"en-US","value":"2 April 2013"}]},"commandUuid":"4c7cc7c0-9b93-11e2-b18b-0134af3114e2","valueHash":"2c5f9c95f3b9646162e1d49fe6a2d8a9ee462257@v7"}],"fullName":"鮑昌夫人","givenName":"昌夫人","familyName":"鮑","gender":{"schemaVersion":"1.0.0","conclusionType":"GENDER","value":{"type":"http://gedcomx.org/Female"},"conclusionId":"a29ee816-0494-4634-abd6-52092bb6a350","ctConclusionId":"V.777-777P","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMWK-242"},"submitter":{"id":"MMWK-242"},"modified":"1340321906576","modifiedDateNormalized":[{"lang":"en-US","value":"21 June 2012"}]},"commandUuid":"32c42900-bbfa-11e1-9046-019718f9bcb0","valueHash":"a89b17f30c172177aaf7897bbca939478fd503bd@v7"},"birth":{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/Birth","date":{"original":"Abt 0730","normalized":[{"lang":"en-US","value":"0730"},{"value":"0730"}],"ctModifier":"ABOUT","formal":"A+0730"},"place":{"original":"中國","names":[{"lang":"en-US","value":"China"},{"lang":"und","value":"China"}]}},"conclusionId":"ebe0d4fe-20f8-4dad-b4b8-c69c03d0f100","ctConclusionId":"V.777-7774","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMWK-242"},"submitter":{"id":"MMWK-242"},"modified":"1340321906576","modifiedDateNormalized":[{"lang":"en-US","value":"21 June 2012"}]},"commandUuid":"32c42900-bbfa-11e1-9046-019718f9bcb0","valueHash":"818873a6597867dffb936f4c0843358e7e73e611@v7"},"death":{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/Death","place":{"original":"中國","names":[{"lang":"en-US","value":"China"},{"lang":"und","value":"China"}]}},"conclusionId":"ddb21ddf-0042-4808-af3c-5b2e94e08922","ctConclusionId":"V.777-7771","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMWK-242"},"submitter":{"id":"MMWK-242"},"modified":"1340321906576","modifiedDateNormalized":[{"lang":"en-US","value":"21 June 2012"}]},"commandUuid":"32c42900-bbfa-11e1-9046-019718f9bcb0","valueHash":"6e4cd01466c48078ebf6e6e49073bfc026266baa@v7"},"facts":[{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/Birth","date":{"original":"Abt 0730","normalized":[{"lang":"en-US","value":"0730"},{"value":"0730"}],"ctModifier":"ABOUT","formal":"A+0730"},"place":{"original":"中國","names":[{"lang":"en-US","value":"China"},{"lang":"und","value":"China"}]}},"conclusionId":"ebe0d4fe-20f8-4dad-b4b8-c69c03d0f100","ctConclusionId":"V.777-7774","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMWK-242"},"submitter":{"id":"MMWK-242"},"modified":"1340321906576","modifiedDateNormalized":[{"lang":"en-US","value":"21 June 2012"}]},"commandUuid":"32c42900-bbfa-11e1-9046-019718f9bcb0","valueHash":"818873a6597867dffb936f4c0843358e7e73e611@v7"},{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/Death","place":{"original":"中國","names":[{"lang":"en-US","value":"China"},{"lang":"und","value":"China"}]}},"conclusionId":"ddb21ddf-0042-4808-af3c-5b2e94e08922","ctConclusionId":"V.777-7771","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMWK-242"},"submitter":{"id":"MMWK-242"},"modified":"1340321906576","modifiedDateNormalized":[{"lang":"en-US","value":"21 June 2012"}]},"commandUuid":"32c42900-bbfa-11e1-9046-019718f9bcb0","valueHash":"6e4cd01466c48078ebf6e6e49073bfc026266baa@v7"}],"pairings":[{"relationshipRefs":[{"relationshipType":"COUPLE","relationshipId":"M4X2-GLC","lastModified":"1335546419461","lastUserModified":1335546419461},{"relationshipType":"PARENT_CHILD","relationshipId":"MNV5-BTY","lastModified":"1346938726309","lastUserModified":1346938726309}],"manRef":{"personId":"9FSG-WX1"},"womanRef":{"personId":"9FSG-WFM"},"children":[{"personId":"9FSG-WVK","relationshipRef":{"relationshipType":"PARENT_CHILD","relationshipId":"MNV5-BTY","lastModified":"1346938726309","lastUserModified":1346938726309}}],"coupleFactValue":{"type":"http://gedcomx.org/Marriage","date":{"original":"Abt 0761","normalized":[{"lang":"en-US","value":"0761"},{"value":"0761"}],"ctModifier":"ABOUT","formal":"A+0761"},"place":{"original":"中國","names":[{"lang":"en-US","value":"China"},{"lang":"und","value":"China"}]},"conclusionId":"27913e02-f2f7-4653-9bc3-9a13a0896872"},"dismissedSuggestionSummaries":[],"hasBackingCoupleRelationship":true,"preferred":true}],"parentChildRelationshipsAsParent":[{"id":"MNV5-BTY","version":-1,"lastModified":1346938726309,"summary":{"id":"MNV5-BTY","fatherId":"9FSG-WX1","motherId":"9FSG-WFM","childId":"9FSG-WVK","personPerspective":{"selfId":"9FSG-WFM","otherParentId":"9FSG-WX1"}},"fatherId":{"conclusionId":"FATHER","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"M9MJ-G4B"},"submitter":{"id":"M9MJ-G4B"},"modified":"1346938726309","modifiedDateNormalized":[{"lang":"en-US","value":"6 September 2012"}]},"commandUuid":"2ea9dd50-f828-11e1-ac42-01c9935d8558","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"9FSG-WX1"},"valueHash":"db0330b73f24a5b2f7cd63cad9f552bda111e9d6@v7","schemaVersion":"1.0.0"},"motherId":{"conclusionId":"MOTHER","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"M9MJ-G4B"},"submitter":{"id":"M9MJ-G4B"},"modified":"1346938726309","modifiedDateNormalized":[{"lang":"en-US","value":"6 September 2012"}]},"commandUuid":"2ea9dd50-f828-11e1-ac42-01c9935d8558","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"9FSG-WFM"},"valueHash":"c569cd70d712b29479958c7758064cf214b62602@v7","schemaVersion":"1.0.0"},"childId":{"conclusionId":"CHILD","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"M9MJ-G4B"},"submitter":{"id":"M9MJ-G4B"},"modified":"1346938726309","modifiedDateNormalized":[{"lang":"en-US","value":"6 September 2012"}]},"commandUuid":"2ea9dd50-f828-11e1-ac42-01c9935d8558","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"9FSG-WVK"},"valueHash":"6fd11cdf5e5dda3de6ea69cf8543550e6b0fca08@v7","schemaVersion":"1.0.0"},"facts":[{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/BiologicalParent","parentType":"FATHER"},"conclusionId":"4ee16f4a-e4fb-43fe-a03d-d34cd333631f","ctConclusionId":"R.777-7774","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"M9MJ-G4B"},"submitter":{"id":"M9MJ-G4B"},"modified":"1346938726309","modifiedDateNormalized":[{"lang":"en-US","value":"6 September 2012"}]},"commandUuid":"2ea9dd50-f828-11e1-ac42-01c9935d8558","valueHash":"6917621049ec167883724717ca9c4d545babfa6d@v7"},{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/BiologicalParent","parentType":"MOTHER"},"conclusionId":"941173f3-5939-4f2e-a82c-b6d7f48a6515","ctConclusionId":"R.777-7771","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"M9MJ-G4B"},"submitter":{"id":"M9MJ-G4B"},"modified":"1346938726309","modifiedDateNormalized":[{"lang":"en-US","value":"6 September 2012"}]},"commandUuid":"2ea9dd50-f828-11e1-ac42-01c9935d8558","valueHash":"4fef5d7c6bc6ce71dc985fad10149376e97e280b@v7"}]}],"coupleRelationships":[{"id":"M4X2-GLC","version":-1,"lastModified":1335546419461,"summary":{"id":"M4X2-GLC","husbandId":"9FSG-WX1","wifeId":"9FSG-WFM","personPerspective":{"selfId":"9FSG-WFM","otherCoupledPersonId":"9FSG-WX1"}},"husbandId":{"conclusionId":"HUSBAND","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MMB"},"submitter":{"id":"MMMM-MMB"},"modified":"1335546419461","modifiedDateNormalized":[{"lang":"en-US","value":"27 April 2012"}]},"commandUuid":"6609fcd0-908b-11e1-a9a5-0176cda70ddb","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"9FSG-WX1"},"valueHash":"db0330b73f24a5b2f7cd63cad9f552bda111e9d6@v7","schemaVersion":"1.0.0"},"wifeId":{"conclusionId":"WIFE","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MMB"},"submitter":{"id":"MMMM-MMB"},"modified":"1335546419461","modifiedDateNormalized":[{"lang":"en-US","value":"27 April 2012"}]},"commandUuid":"6609fcd0-908b-11e1-a9a5-0176cda70ddb","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"9FSG-WFM"},"valueHash":"c569cd70d712b29479958c7758064cf214b62602@v7","schemaVersion":"1.0.0"},"facts":[{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/Marriage","date":{"original":"Abt 0761","normalized":[{"lang":"en-US","value":"0761"},{"value":"0761"}],"ctModifier":"ABOUT","formal":"A+0761"},"place":{"original":"中國","names":[{"lang":"en-US","value":"China"},{"lang":"und","value":"China"}]}},"conclusionId":"27913e02-f2f7-4653-9bc3-9a13a0896872","ctConclusionId":"R.777-777P","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMWK-242"},"submitter":{"id":"MMMM-MM8"},"modified":"1335546419461","modifiedDateNormalized":[{"lang":"en-US","value":"27 April 2012"}]},"commandUuid":"66a29350-908b-11e1-bb54-015d651f5959","valueHash":"d8010adf3bbf3bf7c24ea36bd26cc82a078b03b7@v7"}]}],"oneHopRelativeSummaries":{"9FSG-WX1":{"spaceId":"MMMM-MMM","name":"鮑 昌","nameForms":[{"lang":"und","fullText":"鮑 昌","parts":[{"type":"http://gedcomx.org/Surname","value":"鮑 昌"}],"ctScript":"UNSPECIFIED","langtag":"und","order":"EUROTYPIC","separator":" "}],"gender":"MALE","living":false,"lifespan":"0726-","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"Abt 0726","normalized":[{"lang":"en-US","value":"0726"},{"value":"0726"}],"ctModifier":"ABOUT","formal":"A+0726"},"place":{"original":"中國","names":[{"lang":"en-US","value":"China"},{"lang":"und","value":"China"}]}},"lifespanEnd":{"type":"http://gedcomx.org/Death","place":{"original":"中國","names":[{"lang":"en-US","value":"China"},{"lang":"und","value":"China"}]}},"tombstoned":false,"readOnly":false,"sourcesCount":0,"discussionsCount":0},"9FSG-WVK":{"spaceId":"MMMM-MMM","name":"鮑彌遜","nameForms":[{"lang":"und-Hani","fullText":"鮑彌遜","parts":[{"type":"http://gedcomx.org/Surname","value":"鮑"},{"type":"http://gedcomx.org/Given","value":"彌遜"}],"ctScript":"CHINESE","langtag":"und-Hani","order":"SINOTYPIC","separator":""}],"gender":"MALE","living":false,"lifespan":"0762-","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"Abt 0762","normalized":[{"lang":"en-US","value":"0762"},{"value":"0762"}],"ctModifier":"ABOUT","formal":"A+0762"},"place":{"original":"中國","names":[{"lang":"en-US","value":"China"},{"lang":"und","value":"China"}]}},"lifespanEnd":{"type":"http://gedcomx.org/Death","place":{"original":"中國","names":[{"lang":"en-US","value":"China"},{"lang":"und","value":"China"}]}},"tombstoned":false,"readOnly":false,"sourcesCount":0,"discussionsCount":0}},"canUserViewOrdinances":true,"commandUuid":"318896a0-254e-11e5-a4a0-017fb953cb2e","entityReferenceTypeSummaries":[{"type":"ORDINANCE","refs":[{"entityRefId":"ffcbe862-d1f8-4e2b-8628-df42a9ce8cfc","uri":"ows.755L-V1S","role":"ORD_SPOUSE"},{"entityRefId":"3e6d3063-cd1d-4efe-a951-e4f218d55983","uri":"ows.7GL2-PQV","role":"ORD_MOTHER"},{"entityRefId":"413eea8b-f25c-4877-9e23-4449432d8bc6","uri":"ows.MXKK-RPK","role":"ORD_SPOUSE"},{"entityRefId":"84df8d3a-9c7b-40f5-8266-98e7550c9eee","uri":"ows.M68X-G4Q","role":"ORD_PRINCIPAL"},{"entityRefId":"dc03b4fe-eabb-4be9-bc05-f4c6a37c7fb6","uri":"ows.M68X-G43","role":"ORD_MOTHER"}]}],"ordinanceReferences":[{"entityRefId":"ffcbe862-d1f8-4e2b-8628-df42a9ce8cfc","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM5"},"submitter":{"id":"MMQJ-LND"},"modified":"1436345347338","modifiedDateNormalized":[{"lang":"en-US","value":"8 July 2015"}]},"value":{"uri":"ows.755L-V1S","type":"ORDINANCE","role":"ORD_SPOUSE"},"ctReferenceId":"ctposr.3X22-11H","commandUuid":"318896a0-254e-11e5-a4a0-017fb953cb2e","valueHash":"bba2108c4eb7c5d32eb4110d0fb108d05e60a227@v7","schemaVersion":"1.0.0"},{"entityRefId":"3e6d3063-cd1d-4efe-a951-e4f218d55983","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM5"},"submitter":{"id":"MMQJ-LND"},"modified":"1436330750952","modifiedDateNormalized":[{"lang":"en-US","value":"8 July 2015"}]},"value":{"uri":"ows.7GL2-PQV","type":"ORDINANCE","role":"ORD_MOTHER"},"ctReferenceId":"ctposr.3DTT-QX7","commandUuid":"3568d680-252c-11e5-bd8f-016b25ab3aaa","valueHash":"926f7ef15c52b56bf5eed6b76b7fa1f34e9bd7fc@v7","schemaVersion":"1.0.0"},{"entityRefId":"413eea8b-f25c-4877-9e23-4449432d8bc6","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM5"},"submitter":{"id":"MMQJ-LND"},"modified":"1436204818698","modifiedDateNormalized":[{"lang":"en-US","value":"6 July 2015"}]},"value":{"uri":"ows.MXKK-RPK","type":"ORDINANCE","role":"ORD_SPOUSE"},"ctReferenceId":"ctposr.S1H2-KG1","commandUuid":"ffefd6a0-2406-11e5-b764-0103c1f137fd","valueHash":"d7f90a1d6c1844415d1109702f82283dc62eea57@v7","schemaVersion":"1.0.0"},{"entityRefId":"84df8d3a-9c7b-40f5-8266-98e7550c9eee","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM5"},"submitter":{"id":"MMQJ-LND"},"modified":"1436048687025","modifiedDateNormalized":[{"lang":"en-US","value":"4 July 2015"}]},"value":{"uri":"ows.M68X-G4Q","type":"ORDINANCE","role":"ORD_PRINCIPAL"},"ctReferenceId":"ctposr.STJV-GTB","commandUuid":"7a353210-229b-11e5-bdb1-01029e5eaac6","valueHash":"e40c6c03ecfe3089e146434c7b8a4df90b4f39a5@v7","schemaVersion":"1.0.0"},{"entityRefId":"dc03b4fe-eabb-4be9-bc05-f4c6a37c7fb6","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM5"},"submitter":{"id":"MMQJ-LND"},"modified":"1436048686920","modifiedDateNormalized":[{"lang":"en-US","value":"4 July 2015"}]},"value":{"uri":"ows.M68X-G43","type":"ORDINANCE","role":"ORD_MOTHER"},"ctReferenceId":"ctposr.STJV-G28","commandUuid":"7a252c80-229b-11e5-8cf2-018626215541","valueHash":"ad283a4eaf398f43b336cd82f497f97c98f4d2ba@v7","schemaVersion":"1.0.0"}],"deletable":false}';
+  var missingFamilyName = '{"id":"KHTY-F5F","version":136847401137170001,"lastModified":1465447313717,"summary":{"spaceId":"MMMM-MMM","name":"Ann","nameForms":[{"lang":"und","fullText":"Ann","parts":[{"type":"http://gedcomx.org/Given","value":"Ann"}],"ctScript":"UNSPECIFIED","langtag":"und","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":false,"lifespan":"1769-","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"abt 1769","normalized":[{"lang":"en-US","value":"1769"},{"value":"1769"}],"ctModifier":"ABOUT","formal":"A+1769"},"place":{"original":"of Glodwick, Oldham, Lancs., Eng.","names":[{"lang":"en-US","value":"Glodwick, Lancashire, England, United Kingdom"},{"lang":"und","value":"Glodwick, Lancashire, England, United Kingdom"}]}},"lifespanEnd":{"type":"http://gedcomx.org/Death"},"tombstoned":false,"readOnly":false,"sourcesCount":3,"discussionsCount":0,"notesCount":0},"name":{"schemaVersion":"1.0.0","conclusionType":"NAME","preferred":true,"value":{"type":"http://gedcomx.org/BirthName","ctStyle":"EUROTYPIC","nameForms":[{"lang":"und","fullText":"Ann","parts":[{"type":"http://gedcomx.org/Given","value":"Ann"}],"ctScript":"UNSPECIFIED","langtag":"und","order":"EUROTYPIC","separator":" "}]},"conclusionId":"ddfa08c7-905a-4cbf-b994-9d4514d2af50","ctConclusionId":"V.777-777N","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMWG-V3Y"},"submitter":{"id":"MMWG-V3Y"},"modified":"1337844310904","modifiedDateNormalized":[{"lang":"en-US","value":"24 May 2012"}]},"commandUuid":"98aabf80-a571-11e1-b5be-01a689990e92","valueHash":"cb07381143dc739b5de1267b3c6e46fd5b66d387@v7"},"alternateNames":[{"schemaVersion":"1.0.0","conclusionType":"NAME","preferred":false,"value":{"type":"http://gedcomx.org/BirthName","ctStyle":"EUROTYPIC","nameForms":[{"lang":"und","fullText":"Ann Winterbottom","parts":[{"type":"http://gedcomx.org/Given","value":"Ann"},{"type":"http://gedcomx.org/Surname","value":"Winterbottom"}],"ctScript":"UNSPECIFIED","langtag":"und","order":"EUROTYPIC","separator":" "}]},"conclusionId":"0ca3ae4f-95c7-4dfa-bd6c-7be6d049400e","ctConclusionId":"N.777-777P","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMWG-V3Y"},"submitter":{"id":"MMWG-V3Y"},"modified":"1337844310904","modifiedDateNormalized":[{"lang":"en-US","value":"24 May 2012"}]},"commandUuid":"98aabf80-a571-11e1-b5be-01a689990e92","valueHash":"368c2c5716931bb31d1bf8750d13299563c6e3a4@v7"},{"schemaVersion":"1.0.0","conclusionType":"NAME","preferred":false,"value":{"type":"http://gedcomx.org/BirthName","ctStyle":"EUROTYPIC","nameForms":[{"lang":"und","fullText":"Mrs. Ann Winterbottom","parts":[{"type":"http://gedcomx.org/Prefix","value":"Mrs."},{"type":"http://gedcomx.org/Given","value":"Ann"},{"type":"http://gedcomx.org/Surname","value":"Winterbottom"}],"ctScript":"UNSPECIFIED","langtag":"und","order":"EUROTYPIC","separator":" "}]},"conclusionId":"970ee2de-e481-4fa0-a7c8-bf4b3b3e24b7","ctConclusionId":"N.777-7774","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMWG-V3Y"},"submitter":{"id":"MMWG-V3Y"},"modified":"1337844310904","modifiedDateNormalized":[{"lang":"en-US","value":"24 May 2012"}]},"commandUuid":"98aabf80-a571-11e1-b5be-01a689990e92","valueHash":"32450a4b13b77f72391ea8cad5aacd2ce00aef29@v7"}],"fullName":"Ann","givenName":"Ann","gender":{"schemaVersion":"1.0.0","conclusionType":"GENDER","value":{"type":"http://gedcomx.org/Female"},"conclusionId":"a29ee816-0494-4634-abd6-52092bb6a350","ctConclusionId":"V.777-777P","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMWG-V3Y"},"submitter":{"id":"MMWG-V3Y"},"modified":"1337844310904","modifiedDateNormalized":[{"lang":"en-US","value":"24 May 2012"}]},"commandUuid":"98aabf80-a571-11e1-b5be-01a689990e92","valueHash":"a89b17f30c172177aaf7897bbca939478fd503bd@v7"},"birth":{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/Birth","date":{"original":"abt 1769","normalized":[{"lang":"en-US","value":"1769"},{"value":"1769"}],"ctModifier":"ABOUT","formal":"A+1769"},"place":{"original":"of Glodwick, Oldham, Lancs., Eng.","names":[{"lang":"en-US","value":"Glodwick, Lancashire, England, United Kingdom"},{"lang":"und","value":"Glodwick, Lancashire, England, United Kingdom"}]}},"conclusionId":"ebe0d4fe-20f8-4dad-b4b8-c69c03d0f100","ctConclusionId":"V.777-7774","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMWG-V3Y"},"submitter":{"id":"MMWG-V3Y"},"modified":"1337844310904","modifiedDateNormalized":[{"lang":"en-US","value":"24 May 2012"}]},"commandUuid":"98aabf80-a571-11e1-b5be-01a689990e92","valueHash":"c544658e34c356b8a398a6d0284c30c8af939218@v7"},"death":{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/Death"},"conclusionId":"ddb21ddf-0042-4808-af3c-5b2e94e08922","ctConclusionId":"V.777-7771","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM8"},"submitter":{"id":"MMMM-MM8"},"modified":"1337844310904","modifiedDateNormalized":[{"lang":"en-US","value":"24 May 2012"}]},"commandUuid":"98aabf80-a571-11e1-b5be-01a689990e92","valueHash":"34b56a32b088b858460d7a908b2922e547725ad7@v7"},"facts":[{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/Birth","date":{"original":"abt 1769","normalized":[{"lang":"en-US","value":"1769"},{"value":"1769"}],"ctModifier":"ABOUT","formal":"A+1769"},"place":{"original":"of Glodwick, Oldham, Lancs., Eng.","names":[{"lang":"en-US","value":"Glodwick, Lancashire, England, United Kingdom"},{"lang":"und","value":"Glodwick, Lancashire, England, United Kingdom"}]}},"conclusionId":"ebe0d4fe-20f8-4dad-b4b8-c69c03d0f100","ctConclusionId":"V.777-7774","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMWG-V3Y"},"submitter":{"id":"MMWG-V3Y"},"modified":"1337844310904","modifiedDateNormalized":[{"lang":"en-US","value":"24 May 2012"}]},"commandUuid":"98aabf80-a571-11e1-b5be-01a689990e92","valueHash":"c544658e34c356b8a398a6d0284c30c8af939218@v7"},{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/Death"},"conclusionId":"ddb21ddf-0042-4808-af3c-5b2e94e08922","ctConclusionId":"V.777-7771","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM8"},"submitter":{"id":"MMMM-MM8"},"modified":"1337844310904","modifiedDateNormalized":[{"lang":"en-US","value":"24 May 2012"}]},"commandUuid":"98aabf80-a571-11e1-b5be-01a689990e92","valueHash":"34b56a32b088b858460d7a908b2922e547725ad7@v7"}],"pairings":[{"relationshipRefs":[{"relationshipType":"COUPLE","relationshipId":"M9XQ-6S6","lastModified":"1376432822687","lastUserModified":1376432822687},{"relationshipType":"PARENT_CHILD","relationshipId":"M9BC-XWG","lastModified":"1334505526053","lastUserModified":1334505526053},{"relationshipType":"PARENT_CHILD","relationshipId":"M9B6-GVM","lastModified":"1334506121312","lastUserModified":1334506121312},{"relationshipType":"PARENT_CHILD","relationshipId":"M3JT-G3M","lastModified":"1334713270760","lastUserModified":1334713270760},{"relationshipType":"PARENT_CHILD","relationshipId":"MXRN-L4G","lastModified":"1336028709226","lastUserModified":1336028709226}],"manRef":{"personId":"KHY1-HB4"},"womanRef":{"personId":"KHTY-F5F"},"children":[{"personId":"KHYZ-D64","relationshipRef":{"relationshipType":"PARENT_CHILD","relationshipId":"M9BC-XWG","lastModified":"1334505526053","lastUserModified":1334505526053}},{"personId":"L4BG-K73","relationshipRef":{"relationshipType":"PARENT_CHILD","relationshipId":"MXRN-L4G","lastModified":"1336028709226","lastUserModified":1336028709226}},{"personId":"K8SZ-VDT","relationshipRef":{"relationshipType":"PARENT_CHILD","relationshipId":"M9B6-GVM","lastModified":"1334506121312","lastUserModified":1334506121312}},{"personId":"L4JH-QW3","relationshipRef":{"relationshipType":"PARENT_CHILD","relationshipId":"M3JT-G3M","lastModified":"1334713270760","lastUserModified":1334713270760}}],"dismissedSuggestionSummaries":[],"hasBackingCoupleRelationship":true,"preferred":true}],"parentChildRelationshipsAsParent":[{"id":"M9BC-XWG","version":-1,"lastModified":1334505526053,"summary":{"id":"M9BC-XWG","fatherId":"KHY1-HB4","motherId":"KHTY-F5F","childId":"KHYZ-D64","personPerspective":{"selfId":"KHTY-F5F","otherParentId":"KHY1-HB4"}},"fatherId":{"conclusionId":"FATHER","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MMB"},"submitter":{"id":"MMMM-MMB"},"modified":"1334505526053","modifiedDateNormalized":[{"lang":"en-US","value":"15 April 2012"}]},"commandUuid":"e1387ed0-8713-11e1-b269-0116d72adcb5","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"KHY1-HB4"},"valueHash":"ff363218c5752cd0a7d5f47fbfcf5e6c34acc3ba@v7","schemaVersion":"1.0.0"},"motherId":{"conclusionId":"MOTHER","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MMB"},"submitter":{"id":"MMMM-MMB"},"modified":"1334505526053","modifiedDateNormalized":[{"lang":"en-US","value":"15 April 2012"}]},"commandUuid":"e1387ed0-8713-11e1-b269-0116d72adcb5","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"KHTY-F5F"},"valueHash":"593a6d4b8782a00ac68f9997ac332d95c6aa2052@v7","schemaVersion":"1.0.0"},"childId":{"conclusionId":"CHILD","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MMB"},"submitter":{"id":"MMMM-MMB"},"modified":"1334505526053","modifiedDateNormalized":[{"lang":"en-US","value":"15 April 2012"}]},"commandUuid":"e1387ed0-8713-11e1-b269-0116d72adcb5","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"KHYZ-D64"},"valueHash":"9b6cff5806f5092abf7771f1dac3382f2caf6dc1@v7","schemaVersion":"1.0.0"},"facts":[{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/BiologicalParent","parentType":"FATHER"},"conclusionId":"4ee16f4a-e4fb-43fe-a03d-d34cd333631f","ctConclusionId":"R.777-7774","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMWG-V3Y"},"submitter":{"id":"MMMM-MM8"},"modified":"1334505526053","modifiedDateNormalized":[{"lang":"en-US","value":"15 April 2012"}]},"commandUuid":"e1d11550-8713-11e1-8c63-01683527482d","valueHash":"6917621049ec167883724717ca9c4d545babfa6d@v7"},{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/BiologicalParent","parentType":"MOTHER"},"conclusionId":"941173f3-5939-4f2e-a82c-b6d7f48a6515","ctConclusionId":"R.777-7771","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMWG-V3Y"},"submitter":{"id":"MMMM-MM8"},"modified":"1334505526053","modifiedDateNormalized":[{"lang":"en-US","value":"15 April 2012"}]},"commandUuid":"e1d11550-8713-11e1-8c63-01683527482d","valueHash":"4fef5d7c6bc6ce71dc985fad10149376e97e280b@v7"}]},{"id":"MXRN-L4G","version":-1,"lastModified":1336028709226,"summary":{"id":"MXRN-L4G","fatherId":"KHY1-HB4","motherId":"KHTY-F5F","childId":"L4BG-K73","personPerspective":{"selfId":"KHTY-F5F","otherParentId":"KHY1-HB4"}},"fatherId":{"conclusionId":"FATHER","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MMB"},"submitter":{"id":"MMMM-MMB"},"modified":"1336028709226","modifiedDateNormalized":[{"lang":"en-US","value":"3 May 2012"}]},"commandUuid":"5123e620-94ee-11e1-92b6-0135163d28c8","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"KHY1-HB4"},"valueHash":"ff363218c5752cd0a7d5f47fbfcf5e6c34acc3ba@v7","schemaVersion":"1.0.0"},"motherId":{"conclusionId":"MOTHER","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MMB"},"submitter":{"id":"MMMM-MMB"},"modified":"1336028709226","modifiedDateNormalized":[{"lang":"en-US","value":"3 May 2012"}]},"commandUuid":"5123e620-94ee-11e1-92b6-0135163d28c8","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"KHTY-F5F"},"valueHash":"593a6d4b8782a00ac68f9997ac332d95c6aa2052@v7","schemaVersion":"1.0.0"},"childId":{"conclusionId":"CHILD","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MMB"},"submitter":{"id":"MMMM-MMB"},"modified":"1336028709226","modifiedDateNormalized":[{"lang":"en-US","value":"3 May 2012"}]},"commandUuid":"5123e620-94ee-11e1-92b6-0135163d28c8","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"L4BG-K73"},"valueHash":"2c0135a7935145c15f5be0909f092aaf1e5df3fc@v7","schemaVersion":"1.0.0"},"facts":[{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/BiologicalParent","parentType":"MOTHER"},"conclusionId":"69ce94dc-119b-43cc-ac05-600638f793d4","ctConclusionId":"R.777-777N","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMWG-V3Y"},"submitter":{"id":"MMMM-MM8"},"modified":"1336028709226","modifiedDateNormalized":[{"lang":"en-US","value":"3 May 2012"}]},"commandUuid":"51bc7ca0-94ee-11e1-9250-01bf8ade6f27","valueHash":"4fef5d7c6bc6ce71dc985fad10149376e97e280b@v7"},{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/BiologicalParent","parentType":"FATHER"},"conclusionId":"4ee16f4a-e4fb-43fe-a03d-d34cd333631f","ctConclusionId":"R.777-7774","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMWG-V3Y"},"submitter":{"id":"MMMM-MM8"},"modified":"1336028709226","modifiedDateNormalized":[{"lang":"en-US","value":"3 May 2012"}]},"commandUuid":"51bc7ca0-94ee-11e1-9250-01bf8ade6f27","valueHash":"6917621049ec167883724717ca9c4d545babfa6d@v7"}]},{"id":"M9B6-GVM","version":-1,"lastModified":1334506121312,"summary":{"id":"M9B6-GVM","fatherId":"KHY1-HB4","motherId":"KHTY-F5F","childId":"K8SZ-VDT","personPerspective":{"selfId":"KHTY-F5F","otherParentId":"KHY1-HB4"}},"fatherId":{"conclusionId":"FATHER","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MMB"},"submitter":{"id":"MMMM-MMB"},"modified":"1334506121312","modifiedDateNormalized":[{"lang":"en-US","value":"15 April 2012"}]},"commandUuid":"4405cf80-8715-11e1-88fc-018724d6ad01","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"KHY1-HB4"},"valueHash":"ff363218c5752cd0a7d5f47fbfcf5e6c34acc3ba@v7","schemaVersion":"1.0.0"},"motherId":{"conclusionId":"MOTHER","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MMB"},"submitter":{"id":"MMMM-MMB"},"modified":"1334506121312","modifiedDateNormalized":[{"lang":"en-US","value":"15 April 2012"}]},"commandUuid":"4405cf80-8715-11e1-88fc-018724d6ad01","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"KHTY-F5F"},"valueHash":"593a6d4b8782a00ac68f9997ac332d95c6aa2052@v7","schemaVersion":"1.0.0"},"childId":{"conclusionId":"CHILD","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MMB"},"submitter":{"id":"MMMM-MMB"},"modified":"1334506121312","modifiedDateNormalized":[{"lang":"en-US","value":"15 April 2012"}]},"commandUuid":"4405cf80-8715-11e1-88fc-018724d6ad01","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"K8SZ-VDT"},"valueHash":"39c25531117b230a0f71053665e1556aa7c89986@v7","schemaVersion":"1.0.0"},"facts":[{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/BiologicalParent","parentType":"FATHER"},"conclusionId":"4ee16f4a-e4fb-43fe-a03d-d34cd333631f","ctConclusionId":"R.777-7774","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM8"},"submitter":{"id":"MMMM-MM8"},"modified":"1334506121312","modifiedDateNormalized":[{"lang":"en-US","value":"15 April 2012"}]},"commandUuid":"449e6600-8715-11e1-8779-017f985084aa","valueHash":"6917621049ec167883724717ca9c4d545babfa6d@v7"},{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/BiologicalParent","parentType":"MOTHER"},"conclusionId":"69ce94dc-119b-43cc-ac05-600638f793d4","ctConclusionId":"R.777-777N","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM8"},"submitter":{"id":"MMMM-MM8"},"modified":"1334506121312","modifiedDateNormalized":[{"lang":"en-US","value":"15 April 2012"}]},"commandUuid":"449e6600-8715-11e1-8779-017f985084aa","valueHash":"4fef5d7c6bc6ce71dc985fad10149376e97e280b@v7"}]},{"id":"M3JT-G3M","version":-1,"lastModified":1334713270760,"summary":{"id":"M3JT-G3M","fatherId":"KHY1-HB4","motherId":"KHTY-F5F","childId":"L4JH-QW3","personPerspective":{"selfId":"KHTY-F5F","otherParentId":"KHY1-HB4"}},"fatherId":{"conclusionId":"FATHER","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MMB"},"submitter":{"id":"MMMM-MMB"},"modified":"1334713270760","modifiedDateNormalized":[{"lang":"en-US","value":"18 April 2012"}]},"commandUuid":"92b72000-88f7-11e1-b8c7-016c0ec0a05f","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"KHY1-HB4"},"valueHash":"ff363218c5752cd0a7d5f47fbfcf5e6c34acc3ba@v7","schemaVersion":"1.0.0"},"motherId":{"conclusionId":"MOTHER","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MMB"},"submitter":{"id":"MMMM-MMB"},"modified":"1334713270760","modifiedDateNormalized":[{"lang":"en-US","value":"18 April 2012"}]},"commandUuid":"92b72000-88f7-11e1-b8c7-016c0ec0a05f","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"KHTY-F5F"},"valueHash":"593a6d4b8782a00ac68f9997ac332d95c6aa2052@v7","schemaVersion":"1.0.0"},"childId":{"conclusionId":"CHILD","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MMB"},"submitter":{"id":"MMMM-MMB"},"modified":"1334713270760","modifiedDateNormalized":[{"lang":"en-US","value":"18 April 2012"}]},"commandUuid":"92b72000-88f7-11e1-b8c7-016c0ec0a05f","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"L4JH-QW3"},"valueHash":"e388aba71b75b8876381376731cc3c24daf1815a@v7","schemaVersion":"1.0.0"},"facts":[{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/BiologicalParent","parentType":"FATHER"},"conclusionId":"4ee16f4a-e4fb-43fe-a03d-d34cd333631f","ctConclusionId":"R.777-7774","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM8"},"submitter":{"id":"MMMM-MM8"},"modified":"1334713270760","modifiedDateNormalized":[{"lang":"en-US","value":"18 April 2012"}]},"commandUuid":"934fb680-88f7-11e1-bb8b-01c96d9e07f7","valueHash":"6917621049ec167883724717ca9c4d545babfa6d@v7"},{"schemaVersion":"1.0.0","conclusionType":"FACT","value":{"type":"http://gedcomx.org/BiologicalParent","parentType":"MOTHER"},"conclusionId":"941173f3-5939-4f2e-a82c-b6d7f48a6515","ctConclusionId":"R.777-7771","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM8"},"submitter":{"id":"MMMM-MM8"},"modified":"1334713270760","modifiedDateNormalized":[{"lang":"en-US","value":"18 April 2012"}]},"commandUuid":"934fb680-88f7-11e1-bb8b-01c96d9e07f7","valueHash":"4fef5d7c6bc6ce71dc985fad10149376e97e280b@v7"}]}],"coupleRelationships":[{"id":"M9XQ-6S6","version":-1,"lastModified":1376432822687,"summary":{"id":"M9XQ-6S6","husbandId":"KHY1-HB4","wifeId":"KHTY-F5F","personPerspective":{"selfId":"KHTY-F5F","otherCoupledPersonId":"KHY1-HB4"}},"husbandId":{"conclusionId":"HUSBAND","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MMB"},"submitter":{"id":"MMMM-MMB"},"modified":"1334564220542","modifiedDateNormalized":[{"lang":"en-US","value":"16 April 2012"}]},"commandUuid":"89dcc360-879c-11e1-a845-01b031bf708b","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"KHY1-HB4"},"valueHash":"ff363218c5752cd0a7d5f47fbfcf5e6c34acc3ba@v7","schemaVersion":"1.0.0"},"wifeId":{"conclusionId":"WIFE","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MMB"},"submitter":{"id":"MMMM-MMB"},"modified":"1334564220542","modifiedDateNormalized":[{"lang":"en-US","value":"16 April 2012"}]},"commandUuid":"89dcc360-879c-11e1-a845-01b031bf708b","conclusionType":"CONTRIBUTION_TRACKED_ID","value":{"personId":"KHTY-F5F"},"valueHash":"593a6d4b8782a00ac68f9997ac332d95c6aa2052@v7","schemaVersion":"1.0.0"}}],"oneHopRelativeSummaries":{"KHYZ-D64":{"spaceId":"MMMM-MMM","name":"Betty Winterbottom","nameForms":[{"lang":"und","fullText":"Betty Winterbottom","parts":[{"type":"http://gedcomx.org/Given","value":"Betty"},{"type":"http://gedcomx.org/Surname","value":"Winterbottom"}],"ctScript":"UNSPECIFIED","langtag":"und","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":false,"lifespan":"1791-","lifespanBegin":{"type":"http://gedcomx.org/Christening","date":{"original":"21 AUG 1791","normalized":[{"lang":"en-US","value":"21 August 1791"},{"value":"21 August 1791"}],"formal":"+1791-08-21"},"place":{"original":"Saint Mary,Oldham,Lancashire,England","names":[{"lang":"en-US","value":"Oldham, Lancashire, England, United Kingdom"},{"lang":"und","value":"Oldham, Lancashire, England, United Kingdom"}]}},"lifespanEnd":{"type":"http://gedcomx.org/Death"},"tombstoned":false,"readOnly":false,"sourcesCount":1,"discussionsCount":0},"KHY1-HB4":{"spaceId":"MMMM-MMM","name":"James Winterbottom","nameForms":[{"lang":"und","fullText":"James Winterbottom","parts":[{"type":"http://gedcomx.org/Given","value":"James"},{"type":"http://gedcomx.org/Surname","value":"Winterbottom"}],"ctScript":"UNSPECIFIED","langtag":"und","order":"EUROTYPIC","separator":" "}],"gender":"MALE","living":false,"lifespan":"1765-","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"abt 1765","normalized":[{"lang":"en-US","value":"1765"},{"value":"1765"}],"ctModifier":"ABOUT","formal":"A+1765"},"place":{"original":"of Glodwick, Oldham, Lancs., Eng.","names":[{"lang":"en-US","value":"Glodwick, Lancashire, England, United Kingdom"},{"lang":"und","value":"Glodwick, Lancashire, England, United Kingdom"}]}},"lifespanEnd":{"type":"http://gedcomx.org/Death"},"tombstoned":false,"readOnly":false,"sourcesCount":3,"discussionsCount":0},"L4JH-QW3":{"spaceId":"MMMM-MMM","name":"Mary Winterbottom","nameForms":[{"lang":"und","fullText":"Mary Winterbottom","parts":[{"type":"http://gedcomx.org/Given","value":"Mary"},{"type":"http://gedcomx.org/Surname","value":"Winterbottom"}],"ctScript":"UNSPECIFIED","langtag":"und","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":false,"lifespan":"1797-","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"1797","normalized":[{"lang":"en-US","value":"1797"},{"value":"1797"}],"ctModifier":"ABOUT","formal":"A+1797"},"place":{"original":"Barnsley, Yorkshire, England, United Kingdom","names":[{"lang":"en-US","value":"Barnsley, Yorkshire, England, United Kingdom"},{"lang":"und","value":"Barnsley, Yorkshire, England, United Kingdom"}]}},"lifespanEnd":{"type":"http://gedcomx.org/Death"},"tombstoned":false,"readOnly":false,"sourcesCount":3,"discussionsCount":0},"K8SZ-VDT":{"spaceId":"MMMM-MMM","name":"James Winterbottom","nameForms":[{"lang":"und","fullText":"James Winterbottom","parts":[{"type":"http://gedcomx.org/Given","value":"James"},{"type":"http://gedcomx.org/Surname","value":"Winterbottom"}],"ctScript":"UNSPECIFIED","langtag":"und","order":"EUROTYPIC","separator":" "}],"gender":"MALE","living":false,"lifespan":"1794-","lifespanBegin":{"type":"http://gedcomx.org/Christening","date":{"original":"08 APR 1794","normalized":[{"lang":"en-US","value":"8 April 1794"},{"value":"8 April 1794"}],"formal":"+1794-04-08"},"place":{"original":"Saint Mary,Oldham,Lancashire,England","names":[{"lang":"en-US","value":"Oldham, Lancashire, England, United Kingdom"},{"lang":"und","value":"Oldham, Lancashire, England, United Kingdom"}]}},"lifespanEnd":{"type":"http://gedcomx.org/Death"},"tombstoned":false,"readOnly":false,"sourcesCount":1,"discussionsCount":0},"L4BG-K73":{"spaceId":"MMMM-MMM","name":"Mary Winterbottom","nameForms":[{"lang":"und","fullText":"Mary Winterbottom","parts":[{"type":"http://gedcomx.org/Given","value":"Mary"},{"type":"http://gedcomx.org/Surname","value":"Winterbottom"}],"ctScript":"UNSPECIFIED","langtag":"und","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":false,"lifespan":"1792-1865","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"28 October 1792","normalized":[{"lang":"en-US","value":"28 October 1792"},{"value":"28 October 1792"}],"formal":"+1792-10-28"},"place":{"original":"Paddock, Yorkshire, England"}},"lifespanEnd":{"type":"http://gedcomx.org/Death","date":{"original":"9 Jul 1865","normalized":[{"lang":"en-US","value":"9 July 1865"},{"value":"9 July 1865"}],"formal":"+1865-07-09"},"place":{"original":"Huddersfield, Yorkshire, England, United Kingdom","names":[{"lang":"en-US","value":"Huddersfield, Yorkshire, England, United Kingdom"},{"lang":"und","value":"Huddersfield, Yorkshire, England, United Kingdom"}]}},"tombstoned":false,"readOnly":false,"sourcesCount":8,"discussionsCount":0}},"canUserViewOrdinances":true,"commandUuid":"7d376651-2dfc-11e6-91ef-f738424174f0","entityReferenceTypeSummaries":[{"type":"SOURCE","refs":[{"entityRefId":"55e6a987-6320-4b3e-9c62-1fa4fb48795d","uri":"9M4C-YTQ"},{"entityRefId":"59e95002-e1a6-4c3e-ae89-22509b69c3b7","uri":"M2RF-4QK"},{"entityRefId":"926d5997-f191-41a8-8d66-e375c4ab4a42","uri":"M56Q-YD6"}]},{"type":"ORDINANCE","refs":[{"entityRefId":"d3adc475-6eef-4db1-9a63-4349872dfeeb","uri":"ows.MFS4-3TJ","role":"ORD_SPOUSE"},{"entityRefId":"379db000-a1c1-473b-9a61-29b863be68b2","uri":"ows.MQQD-YRN","role":"ORD_PRINCIPAL"},{"entityRefId":"a359bb15-fb56-471c-b9b3-99ce6f8d6dbb","uri":"ows.M97Y-GQN","role":"ORD_MOTHER"},{"entityRefId":"cb332f5a-7ac6-46c9-af54-20ae58e11697","uri":"ows.M992-8HX","role":"ORD_MOTHER"},{"entityRefId":"4342760c-9054-409c-808b-35843f0ab9da","uri":"ows.M9MC-4CZ","role":"ORD_MOTHER"},{"entityRefId":"fc1b634f-8bba-49d3-b2f4-8d680ad8458d","uri":"ows.MMC3-CZ8","role":"ORD_MOTHER"},{"entityRefId":"12faf347-3dba-485a-b2fa-270fbbc42008","uri":"ows.MMC3-C4K","role":"ORD_MOTHER"},{"entityRefId":"cdf31da1-e528-4a33-8a79-7312c6ebeb63","uri":"ows.MMC3-CSH","role":"ORD_MOTHER"},{"entityRefId":"27ece48f-10f7-4f26-bc22-ff2caba0c280","uri":"ows.MMC3-HTK","role":"ORD_PRINCIPAL"}]}],"sourceReferences":[{"entityRefId":"55e6a987-6320-4b3e-9c62-1fa4fb48795d","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM6"},"submitter":{"id":"MMMM-MMB"},"modified":"1424464047822","modifiedDateNormalized":[{"lang":"en-US","value":"20 February 2015"}]},"value":{"uri":"9M4C-YTQ","type":"SOURCE"},"ctReferenceId":"ctpsr.MHVB-CWN","commandUuid":"e3298ee0-b93e-11e4-9a33-0153ac17a75e","valueHash":"306988b61e46c1dea4207e8c2f671b8837b2291a@v7","schemaVersion":"1.0.0"},{"entityRefId":"59e95002-e1a6-4c3e-ae89-22509b69c3b7","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM6"},"submitter":{"id":"MMMM-MMB"},"modified":"1424463174782","modifiedDateNormalized":[{"lang":"en-US","value":"20 February 2015"}]},"value":{"uri":"M2RF-4QK","type":"SOURCE"},"ctReferenceId":"ctpsr.MHVV-KK8","commandUuid":"daca39e0-b93c-11e4-8731-019fd6ffa1e6","valueHash":"a8d58d00691468e024e87505d059fee5ef7af2e8@v7","schemaVersion":"1.0.0"},{"entityRefId":"926d5997-f191-41a8-8d66-e375c4ab4a42","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM6"},"submitter":{"id":"MMMM-MMB"},"modified":"1424462693689","modifiedDateNormalized":[{"lang":"en-US","value":"20 February 2015"}]},"value":{"uri":"M56Q-YD6","type":"SOURCE"},"ctReferenceId":"ctpsr.MHVX-9D7","commandUuid":"bc094290-b93b-11e4-8668-0169e2dd0515","valueHash":"3f8571a3f2dc881bcd9c394de683453647f0347c@v7","schemaVersion":"1.0.0"}],"ordinanceReferences":[{"entityRefId":"d3adc475-6eef-4db1-9a63-4349872dfeeb","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM5"},"submitter":{"id":"MMQJ-LND"},"modified":"1436214133325","modifiedDateNormalized":[{"lang":"en-US","value":"6 July 2015"}]},"value":{"uri":"ows.MFS4-3TJ","type":"ORDINANCE","role":"ORD_SPOUSE"},"ctReferenceId":"ctposr.3M7J-SX7","commandUuid":"afe31fd0-241c-11e5-b4de-0183295a47e2","valueHash":"81e2d395bc3d3d10d6fda697792e0a70719b381d@v7","schemaVersion":"1.0.0"},{"entityRefId":"379db000-a1c1-473b-9a61-29b863be68b2","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM5"},"submitter":{"id":"MMQJ-LND"},"modified":"1435861234005","modifiedDateNormalized":[{"lang":"en-US","value":"2 July 2015"}]},"value":{"uri":"ows.MQQD-YRN","type":"ORDINANCE","role":"ORD_PRINCIPAL"},"ctReferenceId":"ctposr.S7ZY-ZXQ","commandUuid":"07804850-20e7-11e5-81f0-017076ef35e5","valueHash":"91e877b31bc6f9373dc3e75953a546b532b48f7f@v7","schemaVersion":"1.0.0"},{"entityRefId":"a359bb15-fb56-471c-b9b3-99ce6f8d6dbb","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM5"},"submitter":{"id":"MMQJ-LND"},"modified":"1435801499819","modifiedDateNormalized":[{"lang":"en-US","value":"2 July 2015"}]},"value":{"uri":"ows.M97Y-GQN","type":"ORDINANCE","role":"ORD_MOTHER"},"ctReferenceId":"ctposr.9B9L-J49","commandUuid":"f326d7b0-205b-11e5-a5d6-01acdca559df","valueHash":"28453c4c607d1844a065a10211d340b517f5c8c8@v7","schemaVersion":"1.0.0"},{"entityRefId":"cb332f5a-7ac6-46c9-af54-20ae58e11697","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM5"},"submitter":{"id":"MMQJ-LND"},"modified":"1435798628633","modifiedDateNormalized":[{"lang":"en-US","value":"2 July 2015"}]},"value":{"uri":"ows.M992-8HX","type":"ORDINANCE","role":"ORD_MOTHER"},"ctReferenceId":"ctposr.9YGW-4CN","commandUuid":"43caa090-2055-11e5-92d3-01c857899ecf","valueHash":"849d8defb352e68fac46adb9dcaa84f97578a025@v7","schemaVersion":"1.0.0"},{"entityRefId":"4342760c-9054-409c-808b-35843f0ab9da","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM5"},"submitter":{"id":"MMQJ-LND"},"modified":"1435797665588","modifiedDateNormalized":[{"lang":"en-US","value":"2 July 2015"}]},"value":{"uri":"ows.M9MC-4CZ","type":"ORDINANCE","role":"ORD_MOTHER"},"ctReferenceId":"ctposr.9YVB-CTD","commandUuid":"05c59f40-2053-11e5-b944-013eb5007845","valueHash":"1bba70269c7c97b0d271fee4db2c9ae232f9b9ba@v7","schemaVersion":"1.0.0"},{"entityRefId":"fc1b634f-8bba-49d3-b2f4-8d680ad8458d","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM5"},"submitter":{"id":"MMQJ-LND"},"modified":"1435782939146","modifiedDateNormalized":[{"lang":"en-US","value":"1 July 2015"}]},"value":{"uri":"ows.MMC3-CZ8","type":"ORDINANCE","role":"ORD_MOTHER"},"ctReferenceId":"ctposr.9R1Z-ZHF","commandUuid":"bc20e6a0-2030-11e5-a7ab-0137233f59e2","valueHash":"b6b08cbf425d5b9c7b4e234485c5beea5e79781d@v7","schemaVersion":"1.0.0"},{"entityRefId":"12faf347-3dba-485a-b2fa-270fbbc42008","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM5"},"submitter":{"id":"MMQJ-LND"},"modified":"1435782929923","modifiedDateNormalized":[{"lang":"en-US","value":"1 July 2015"}]},"value":{"uri":"ows.MMC3-C4K","type":"ORDINANCE","role":"ORD_MOTHER"},"ctReferenceId":"ctposr.9R1C-617","commandUuid":"b6a19530-2030-11e5-9b01-01dae9399548","valueHash":"d767e63eefaafa770ecf5db9015e39b646021f35@v7","schemaVersion":"1.0.0"},{"entityRefId":"cdf31da1-e528-4a33-8a79-7312c6ebeb63","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM5"},"submitter":{"id":"MMQJ-LND"},"modified":"1435782911408","modifiedDateNormalized":[{"lang":"en-US","value":"1 July 2015"}]},"value":{"uri":"ows.MMC3-CSH","type":"ORDINANCE","role":"ORD_MOTHER"},"ctReferenceId":"ctposr.9R14-2HD","commandUuid":"ab986b00-2030-11e5-b1dc-018ff5525ee6","valueHash":"9f5019c48302494ef113b6016f4ebd9818fe5377@v7","schemaVersion":"1.0.0"},{"entityRefId":"27ece48f-10f7-4f26-bc22-ff2caba0c280","attribution":{"schemaVersion":"1.0.0","migratedAttribution":"true","contributor":{"id":"MMMM-MM5"},"submitter":{"id":"MMQJ-LND"},"modified":"1435782892506","modifiedDateNormalized":[{"lang":"en-US","value":"1 July 2015"}]},"value":{"uri":"ows.MMC3-HTK","type":"ORDINANCE","role":"ORD_PRINCIPAL"},"ctReferenceId":"ctposr.9R17-RTH","commandUuid":"a05433a0-2030-11e5-a613-0155a41409a2","valueHash":"65e637602a64ff6608aa4f24df15f2c279fdf3ae@v7","schemaVersion":"1.0.0"}],"deletable":false}';
+
+      describe("Partial Data", function() {
+        var el;
+        beforeEach(function() {
+          el = document.createElement('fs-person');
+          document.body.appendChild(el);
+        });
+        afterEach(function() {
+          el.remove();
+        });
+        
+        describe('Partial Data - Given PID', function() {
+          
+          it('should not display the given name if no given name is passed in (stacked view)', function(done) {
+            fetchMock.get('/tf/person/LV8K-G8L', {"id":"LV8K-G8L","summary":{"name":"Rost","nameForms":[{"lang":"x-Latn","fullText":"Rost","ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":false,"lifespan":"1916-2007","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"2 February 1916","normalized":[{"lang":"en-US","value":"2 February 1916"},{"value":"2 February 1916"}],"formal":"+1916-02-02"}},"lifespanEnd":{"type":"http://gedcomx.org/Death","date":{"original":"16 November 2007","normalized":[{"lang":"en-US","value":"16 November 2007"},{"value":"16 November 2007"}],"formal":"+2007-11-16"}}},"fullName":"Rost","familyName":"Rost"});
+            el.className += "fs-person--stacked";
+            el.addEventListener('load', function() {
+              var given = el.querySelector(".fs-person-vitals__name-given");
+              expect(window.getComputedStyle(given).display).to.equal('none');
+              done();
+            });
+            el.pid = 'LV8K-G8L';
+          });
+          
+          it('should not display the family name if no family name is passed in (stacked view)', function(done) {
+            fetchMock.get('/tf/person/RRRR-RRR', {"id":"RRRR-RRR","summary":{"name":"Myrtle","nameForms":[{"lang":"x-Latn","fullText":"Myrtle","ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":false,"lifespan":"-2007","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"2 February 1916","normalized":[{"lang":"en-US","value":"2 February 1916"},{"value":"2 February 1916"}],"formal":"+1916-02-02"}},"lifespanEnd":{"type":"http://gedcomx.org/Death","date":{"original":"16 November 2007","normalized":[{"lang":"en-US","value":"16 November 2007"},{"value":"16 November 2007"}],"formal":"+2007-11-16"}}},"fullName":"Myrtle","givenName":"Myrtle"});
+            el.className += "fs-person--stacked";
+            el.addEventListener('load', function() {
+              var family = el.querySelector(".fs-person-vitals__name-family");
+              expect(window.getComputedStyle(family).display).to.equal('none');
+              done();
+            });
+            el.pid = 'RRRR-RRR';
+          });
+          
+          it('should display "Deceased" if no lifespan is given and the person is dead', function(done) {
+            fetchMock.get('/tf/person/GGGG-GGG', {"id":"GGGG-GGG","summary":{"name":"Myrtle Rost","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":false,"lifespan":"-","lifespanEnd":{"type":"http://gedcomx.org/Death"}},"fullName":"Myrtle Rost","givenName":"Myrtle","familyName":"Rost"});
+            el.addEventListener('load', function() {
+              var lifespan = el.querySelector(".fs-person-details__lifeSpan");
+              expect(lifespan.innerHTML).to.equal('Deceased');
+              done();
+            });
+            el.pid = 'GGGG-GGG';
+          });
+          
+          it('should display "Living" if no lifespan is given and the person is living', function(done) {
+            fetchMock.get('/tf/person/LLLL-LLL', {"id":"LLLL-LLL","summary":{"name":"Myrtle Rost","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":true,"lifespan":"-","lifespanEnd":{"type":"http://gedcomx.org/Death"}},"fullName":"Myrtle Rost","givenName":"Myrtle","familyName":"Rost"});
+            el.addEventListener('load', function() {
+              var lifespan = el.querySelector(".fs-person-details__lifeSpan");
+              expect(lifespan.innerHTML).to.equal('Living');
+              done();
+            });
+            el.pid = 'LLLL-LLL';
+          });
+          
+          it('should display "Deceased" for the death date if no death date is given and the person is dead', function(done) {
+            var person = fetchMock.get('/tf/person/AAAA-AAA', {"id":"AAAA-AAA","summary":{"name":"Myrtle Rost","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":false,"lifespan":"1916-","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"2 February 1916","normalized":[{"lang":"en-US","value":"2 February 1916"},{"value":"2 February 1916"}],"formal":"+1916-02-02"}},"lifespanEnd":{"type":"http://gedcomx.org/Death"}},"fullName":"Myrtle Rost","givenName":"Myrtle","familyName":"Rost"});
+            el.addEventListener('load', function() {
+              var lifespanBegin = person.lifespanBegin;
+              var lifespan = el.querySelector(".fs-person-details__lifeSpan");
+              expect(lifespan.innerHTML).to.equal('1916–Deceased');
+              done();
+            });
+            el.pid = 'AAAA-AAA';
+          });
+          
+          it('should display "Living" for the death date if no death date is given and the person is living', function(done) {
+            var person = fetchMock.get('/tf/person/CCCC-CCC', {"id":"CCCC-CCC","summary":{"name":"Myrtle Rost","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":true,"lifespan":"1916-","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"2 February 1916","normalized":[{"lang":"en-US","value":"2 February 1916"},{"value":"2 February 1916"}],"formal":"+1916-02-02"}},"lifespanEnd":{"type":"http://gedcomx.org/Death"}},"fullName":"Myrtle Rost","givenName":"Myrtle","familyName":"Rost"});
+            el.addEventListener('load', function() {
+              var lifespanBegin = person.lifespanBegin;
+              var lifespan = el.querySelector(".fs-person-details__lifeSpan");
+              expect(lifespan.innerHTML).to.equal('1916–Living');
+              done();
+            });
+            el.pid = 'CCCC-CCC';
+          });
+        });
+
+        describe('Partial Data - Given Object', function() {
+          
+          it('should not display the given name if no given name is passed in (stacked view)', function(done) {
+            el.className += "fs-person--stacked";
+            el.addEventListener('load', function() {
+              var given = el.querySelector(".fs-person-vitals__name-given");
+              expect(window.getComputedStyle(given).display).to.equal('none');
+              done();
+            });
+              el.object = '{"id":"BBBB-BBB","summary":{"name":"Rost","nameForms":[{"lang":"x-Latn","fullText":"Rost","ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":false,"lifespan":"1916-2007","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"2 February 1916","normalized":[{"lang":"en-US","value":"2 February 1916"},{"value":"2 February 1916"}],"formal":"+1916-02-02"}},"lifespanEnd":{"type":"http://gedcomx.org/Death","date":{"original":"16 November 2007","normalized":[{"lang":"en-US","value":"16 November 2007"},{"value":"16 November 2007"}],"formal":"+2007-11-16"}}},"fullName":"Rost","familyName":"Rost"}';
+          });
+          
+          it('should not display the family name if no family name is passed in (stacked view)', function(done) {
+            el.className += "fs-person--stacked";
+            el.addEventListener('load', function() {
+              var family = el.querySelector(".fs-person-vitals__name-family");
+              expect(window.getComputedStyle(family).display).to.equal('none');
+              done();
+            });
+            el.object = '{"id":"XXXX-XXX","summary":{"name":"Myrtle","nameForms":[{"lang":"x-Latn","fullText":"Myrtle","ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":false,"lifespan":"-2007","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"2 February 1916","normalized":[{"lang":"en-US","value":"2 February 1916"},{"value":"2 February 1916"}],"formal":"+1916-02-02"}},"lifespanEnd":{"type":"http://gedcomx.org/Death","date":{"original":"16 November 2007","normalized":[{"lang":"en-US","value":"16 November 2007"},{"value":"16 November 2007"}],"formal":"+2007-11-16"}}},"fullName":"Myrtle","givenName":"Myrtle"}';
+          });
+          
+          it('should display "Deceased" if no lifespan is given and the person is dead', function(done) {
+            el.addEventListener('load', function() {
+              var lifespan = el.querySelector(".fs-person-details__lifeSpan");
+              expect(lifespan.innerHTML).to.equal('Deceased');
+              done();
+            });
+            el.object = '{"id":"EEEE-EEE","summary":{"name":"Myrtle Rost","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":false,"lifespan":"-","lifespanEnd":{"type":"http://gedcomx.org/Death"}},"fullName":"Myrtle Rost","givenName":"Myrtle","familyName":"Rost"}';
+          });
+          
+          it('should display "Living" if no lifespan is given and the person is living', function(done) {
+            el.addEventListener('load', function() {
+              var lifespan = el.querySelector(".fs-person-details__lifeSpan");
+              expect(lifespan.innerHTML).to.equal('Living');
+              done();
+            });
+            el.object = '{"id":"WWWWW-WWW","summary":{"name":"Myrtle Rost","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":true,"lifespan":"-","lifespanEnd":{"type":"http://gedcomx.org/Death"}},"fullName":"Myrtle Rost","givenName":"Myrtle","familyName":"Rost"}';
+          });
+          
+          it('should display "Deceased" for the death date if no death date is given and the person is dead', function(done) {
+            el.addEventListener('load', function() {
+              var lifespan = el.querySelector(".fs-person-details__lifeSpan");
+              expect(lifespan.innerHTML).to.equal('1916–Deceased');
+              done();
+            });
+            el.object = '{"id":"QQQQ-QQQ","summary":{"name":"Myrtle Rost","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":false,"lifespan":"1916-","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"2 February 1916","normalized":[{"lang":"en-US","value":"2 February 1916"},{"value":"2 February 1916"}],"formal":"+1916-02-02"}},"lifespanEnd":{"type":"http://gedcomx.org/Death"}},"fullName":"Myrtle Rost","givenName":"Myrtle","familyName":"Rost"}';
+          });
+          
+          it('should display "Living" for the death date if no death date is given and the person is living', function(done) {
+            el.addEventListener('load', function() {
+              var lifespan = el.querySelector(".fs-person-details__lifeSpan");
+              expect(lifespan.innerHTML).to.equal('1916–Living');
+              done();
+            });
+            el.object = '{"id":"TTTT-TTT","summary":{"name":"Myrtle Rost","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":true,"lifespan":"1916-","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"2 February 1916","normalized":[{"lang":"en-US","value":"2 February 1916"},{"value":"2 February 1916"}],"formal":"+1916-02-02"}},"lifespanEnd":{"type":"http://gedcomx.org/Death"}},"fullName":"Myrtle Rost","givenName":"Myrtle","familyName":"Rost"}';
+          });
+        });
+      });
+
+      describe('Attribute Changed', function() {
+        var el;
+        beforeEach(function() {
+           
+          el = document.createElement('fs-person');
+          fetchMock.get('/tf/person/LV8K-G8L', testObject);
+        });
+        afterEach(function() {
+          fetchMock.restore();
+        });
+        
+        it('should update the PID attribute if the PID property is changed', function() {
+          el.pid = 'LV8K-G8L';
+          expect(el.getAttribute('pid')).to.equal('LV8K-G8L');
+        });
+        
+        it('should update the Object attribute if the Object property is changed', function() {
+          el.object = '{"id":"LV8K-G8L","summary":{"spaceId":"MMMM-MMM","name":"Myrtle Rost","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","parts":[{"type":"http://gedcomx.org/Given","value":"Myrtle"},{"type":"http://gedcomx.org/Surname","value":"Rost"}],"ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":false,"lifespan":"1916-2007","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"2 February 1916","normalized":[{"lang":"en-US","value":"2 February 1916"},{"value":"2 February 1916"}],"formal":"+1916-02-02"}},"lifespanEnd":{"type":"http://gedcomx.org/Death","date":{"original":"16 November 2007","normalized":[{"lang":"en-US","value":"16 November 2007"},{"value":"16 November 2007"}],"formal":"+2007-11-16"}},"tombstoned":false,"notesCount":0},"name":{"value":{"type":"http://gedcomx.org/BirthName","ctStyle":"EUROTYPIC","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","parts":[{"type":"http://gedcomx.org/Given","value":"Myrtle"},{"type":"http://gedcomx.org/Surname","value":"Rost"}],"ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}]},"commandUuid":"80a47ea0-b025-11e4-bf99-01c83f377bc8","valueHash":"10531c321088dcad5cffbd559a814159b3bfdc63@v7"},"fullName":"Myrtle Rost","givenName":"Myrtle","familyName":"Rost","deletable":false}';
+          expect(el.getAttribute('object')).to.equal('{"id":"LV8K-G8L","summary":{"spaceId":"MMMM-MMM","name":"Myrtle Rost","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","parts":[{"type":"http://gedcomx.org/Given","value":"Myrtle"},{"type":"http://gedcomx.org/Surname","value":"Rost"}],"ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":false,"lifespan":"1916-2007","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"2 February 1916","normalized":[{"lang":"en-US","value":"2 February 1916"},{"value":"2 February 1916"}],"formal":"+1916-02-02"}},"lifespanEnd":{"type":"http://gedcomx.org/Death","date":{"original":"16 November 2007","normalized":[{"lang":"en-US","value":"16 November 2007"},{"value":"16 November 2007"}],"formal":"+2007-11-16"}},"tombstoned":false,"notesCount":0},"name":{"value":{"type":"http://gedcomx.org/BirthName","ctStyle":"EUROTYPIC","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","parts":[{"type":"http://gedcomx.org/Given","value":"Myrtle"},{"type":"http://gedcomx.org/Surname","value":"Rost"}],"ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}]},"commandUuid":"80a47ea0-b025-11e4-bf99-01c83f377bc8","valueHash":"10531c321088dcad5cffbd559a814159b3bfdc63@v7"},"fullName":"Myrtle Rost","givenName":"Myrtle","familyName":"Rost","deletable":false}');
+        });
+        
+        it('should update the PID attribute if the PID attribute is changed', function() {
+          el.setAttribute('pid', 'LV8K-G8L');
+          expect(el.getAttribute('pid')).to.equal('LV8K-G8L');
+        });
+        
+        it('should update the Object attribute if the Object attribute is changed', function() {
+          el.setAttribute('object', '{"id":"LV8K-G8L","summary":{"spaceId":"MMMM-MMM","name":"Myrtle Rost","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","parts":[{"type":"http://gedcomx.org/Given","value":"Myrtle"},{"type":"http://gedcomx.org/Surname","value":"Rost"}],"ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":false,"lifespan":"1916-2007","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"2 February 1916","normalized":[{"lang":"en-US","value":"2 February 1916"},{"value":"2 February 1916"}],"formal":"+1916-02-02"}},"lifespanEnd":{"type":"http://gedcomx.org/Death","date":{"original":"16 November 2007","normalized":[{"lang":"en-US","value":"16 November 2007"},{"value":"16 November 2007"}],"formal":"+2007-11-16"}},"tombstoned":false,"notesCount":0},"name":{"value":{"type":"http://gedcomx.org/BirthName","ctStyle":"EUROTYPIC","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","parts":[{"type":"http://gedcomx.org/Given","value":"Myrtle"},{"type":"http://gedcomx.org/Surname","value":"Rost"}],"ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}]},"commandUuid":"80a47ea0-b025-11e4-bf99-01c83f377bc8","valueHash":"10531c321088dcad5cffbd559a814159b3bfdc63@v7"},"fullName":"Myrtle Rost","givenName":"Myrtle","familyName":"Rost","deletable":false}');
+          expect(el.getAttribute('object')).to.equal('{"id":"LV8K-G8L","summary":{"spaceId":"MMMM-MMM","name":"Myrtle Rost","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","parts":[{"type":"http://gedcomx.org/Given","value":"Myrtle"},{"type":"http://gedcomx.org/Surname","value":"Rost"}],"ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}],"gender":"FEMALE","living":false,"lifespan":"1916-2007","lifespanBegin":{"type":"http://gedcomx.org/Birth","date":{"original":"2 February 1916","normalized":[{"lang":"en-US","value":"2 February 1916"},{"value":"2 February 1916"}],"formal":"+1916-02-02"}},"lifespanEnd":{"type":"http://gedcomx.org/Death","date":{"original":"16 November 2007","normalized":[{"lang":"en-US","value":"16 November 2007"},{"value":"16 November 2007"}],"formal":"+2007-11-16"}},"tombstoned":false,"notesCount":0},"name":{"value":{"type":"http://gedcomx.org/BirthName","ctStyle":"EUROTYPIC","nameForms":[{"lang":"x-Latn","fullText":"Myrtle Rost","parts":[{"type":"http://gedcomx.org/Given","value":"Myrtle"},{"type":"http://gedcomx.org/Surname","value":"Rost"}],"ctScript":"ROMAN","langtag":"x-Latn","order":"EUROTYPIC","separator":" "}]},"commandUuid":"80a47ea0-b025-11e4-bf99-01c83f377bc8","valueHash":"10531c321088dcad5cffbd559a814159b3bfdc63@v7"},"fullName":"Myrtle Rost","givenName":"Myrtle","familyName":"Rost","deletable":false}');
+        });
+      });
+
+      describe('Events', function() {
+        this.timeout(2000);
+        var el;
+
+        describe('Load Events', function () {
+          beforeEach(function () {
+            el = document.createElement('fs-person');
+            fetchMock.get('/tf/person/LV8K-G8L', testStringObject);
+          });
+          afterEach(function() {
+            fetchMock.restore();
+          });
+          
+          it('should fire an event called load', function(done) {
+            el.addEventListener('load', function() {
+              assert(true);
+              done();
+            });
+            el.pid = 'LV8K-G8L';
+          });
+          
+          it('should fire an event called fs-person-load', function(done) {
+            el.addEventListener('fs-person-load', function() {
+              assert(true);
+              done();
+            });
+            el.pid = 'LV8K-G8L';
+          });
+          
+          it('should fire an event called load', function(done) {
+            el.addEventListener('load', function() {
+              assert(true);
+              done();
+            });
+            el.object = testStringObject;
+          });
+          
+          it('should fire an event called fs-person-load', function(done) {
+            el.addEventListener('fs-person-load', function() {
+              assert(true);
+              done();
+            });
+            el.object = testStringObject;
+          });
+        });
+        
+        describe('Error Events', function () {
+          beforeEach(function () {
+            el = document.createElement('fs-person');
+
+            fetchMock.get('/tf/person/LV8K-G8L', testStringObject);
+            fetchMock.get('/tf/person/bad-pid', 500);
+          });
+
+          afterEach(function() {
+            fetchMock.restore();
+          });
+          
+          it('should fire an error event "error" when pid is bad', function(done) {
+            el.addEventListener('error', function() {
+              assert(true);
+              done();
+            });
+            el.pid = 'bad-pid';
+          });
+          
+          it('should fire an error "fs-person-error" event when pid is bad', function(done) {
+            el.addEventListener('fs-person-error', function() {
+              assert(true);
+              done();
+            });
+            el.pid = 'bad-pid';
+          });
+          
+          it('should fire an error event "error" when object is empty', function(done) {
+            el.addEventListener('error', function() {
+              assert(true);
+              done();
+            });
+            el.object = '{}';
+          });
+          
+          it('should fire an error event "error" when object is empty', function(done) {
+            el.addEventListener('error', function() {
+              assert(true);
+              done();
+            });
+            el.object = '{}';
+          });
+        });
+      });
+
+      describe('Styles From Attributes', function () {
+        this.timeout(2000);
+        var el;
+        beforeEach(function() {
+          
+          el = document.createElement('fs-person');
+          document.body.appendChild(el);
+          fetchMock.get('/tf/person/LV8K-G8L', testStringObject);
+        });
+        afterEach(function() {
+          el.remove();
+          fetchMock.restore();
+        });
+        
+        describe('Create Headers', function() {
+          it('should wrap a heading around the name', function (done) {
+            el.addEventListener('load', function() {
+              var heading = el.querySelector('h3');
+              expect(heading).to.not.be.null;
+              done();
+            });
+            el.setAttribute('heading', 'h3');
+            el.pid = 'LV8K-G8L';
+          });
+          
+          it('should not wrap a heading around the name', function (done) {
+            el.addEventListener('load', function() {
+              var heading = el.querySelector('h3');
+              expect(heading).to.be.null;
+              done();
+            });
+            el.pid = 'LV8K-G8L';
+          });
+        });
+        
+        describe('Create Links', function() {
+          it('should wrap a link around the name', function (done) {
+            el.addEventListener('load', function() {
+              var link = el.querySelector('a');
+              expect(link).to.not.be.null;
+              done();
+            });
+            el.setAttribute('link', '#');
+            el.pid = 'LV8K-G8L';
+          });
+          
+          it('should not wrap a link around the name', function (done) {
+            el.addEventListener('load', function() {
+              var link = el.querySelector('a');
+              expect(link).to.be.null;
+              done();
+            });
+            el.pid = 'LV8K-G8L';
+          });
+        });
+        
+        describe('Passed in noPid', function () {
+          beforeEach(function() {
+            el.setAttribute('noPid', '');
+          });
+          
+          it('should delete the pid element from the DOM', function(done) {
+            el.addEventListener('load', function() {
+              var details = el.querySelector('.fs-person-details__id');
+              expect(details).to.be.null;
+              done();
+            });
+            el.pid = 'LV8K-G8L';
+          });
+          
+          it('should delete the dot from the DOM', function(done) {
+            el.addEventListener('load', function() {
+              var dot = el.querySelector('.fs-person-details__separator');
+              expect(dot).to.be.null;
+              done();
+            });
+            el.pid = 'LV8K-G8L';
+          });
+        });
+        
+       
+        describe('Passed in noLifespan', function() {
+          beforeEach(function() {
+            el.setAttribute('noLifespan', '');
+          });
+          
+          it('should delete the lifespan element from the DOM', function(done) {
+            el.addEventListener('load', function() {
+              var details = el.querySelector('.fs-person-details__lifeSpan');
+              expect(details).to.be.null;
+              done();
+            });
+            el.pid = 'LV8K-G8L';
+          });
+          
+          it('should delete the dot from the DOM', function(done) {
+            el.addEventListener('load', function() {
+              var dot = el.querySelector('.fs-person-details__separator');
+              expect(dot).to.be.null;
+              done();
+            });
+            el.pid = 'LV8K-G8L';
+          });
+        });
+        
+        describe('Passed in noPersonDetails', function() {
+          beforeEach(function() {
+            el.setAttribute('noPersonDetails', '');
+          });
+          
+          it('should delete the pid element from the DOM', function(done) {
+            el.addEventListener('load', function() {
+              var details = el.querySelector('.fs-person-details__id');
+              expect(details).to.be.null;
+              done();
+            });
+            el.pid = 'LV8K-G8L';
+          });
+          
+          it('should delete the lifespan element from the DOM', function(done) {
+            el.addEventListener('load', function() {
+              var details = el.querySelector('.fs-person-details__lifeSpan');
+              expect(details).to.be.null;
+              done();
+            });
+            el.pid = 'LV8K-G8L';
+          });
+          
+          it('should delete the dot from the DOM', function(done) {
+            el.addEventListener('load', function() {
+              var dot = el.querySelector('.fs-person-details__separator');
+              expect(dot).to.be.null;
+              done();
+            });
+            el.pid = 'LV8K-G8L';
+          });
+        });
+        
+        describe('No Extra Attributes', function() {
+          beforeEach(function() {
+            el.pid = 'LV8K-G8L';
+          });
+          
+          it('should not delete the pid element from the DOM', function(done) {
+            el.addEventListener('load', function() {
+              var details = el.querySelector('.fs-person-details__id');
+              expect(details).to.not.be.null;
+              done();
+            });
+            el.pid = 'LV8K-G8L';
+          });
+          
+          it('should not delete the lifespan element from the DOM', function(done) {
+            el.addEventListener('load', function() {
+              var details = el.querySelector('.fs-person-details__lifeSpan');
+              expect(details).to.not.be.null;
+              done();
+            });
+            el.pid = 'LV8K-G8L';
+          });
+          
+          it('should not delete the dot from the DOM', function(done) {
+            el.addEventListener('load', function() {
+              var dot = el.querySelector('.fs-person-details__separator');
+              expect(dot).to.not.be.null;
+              done();
+            });
+            el.pid = 'LV8K-G8L';
+          });
+        });
+        
+        describe('Lifespan', function() {
+          it('should be the short lifespan', function (done) {
+            el.addEventListener('load', function() {
+              var lifespan = el.querySelector('.fs-person-details__lifeSpan').innerHTML;
+              expect(lifespan).to.equal('1916–2007');
+              done();
+            });
+            el.pid = 'LV8K-G8L';
+          });
+          
+          it('should be the long lifespan', function (done) {
+            el.addEventListener('load', function() {
+              var lifespan = el.querySelector('.fs-person-details__lifeSpan').innerHTML;
+              expect(lifespan).to.equal('2 February 1916 – 16 November 2007');
+              done();
+            });
+            el.setAttribute('longLifespan', '');
+            el.pid = 'LV8K-G8L';
+          });
+        });
+      });
+
+      describe('Miscellaneous', function() {
+        this.timeout(2000);
+        var el;
+        beforeEach(function() {
+          // every tests set up code
+          el = document.createElement('fs-person');
+          fetchMock.get('/tf/person/9FSG–WFM', nonEnglishStringObj);
+        });
+        afterEach(function() {
+          fetchMock.restore();
+        });
+        
+        it('should add a lang attribute to the name', function(done) {
+          el.addEventListener('load', function() {
+            var nameLang = el.querySelector('.fs-person-vitals__name').hasAttribute('lang');
+            expect(nameLang).to.be.true;
+            done();
+          });
+          el.pid = '9FSG–WFM';
+        });
+        
+        it('should add und-Hani as the lang attribute', function(done) {
+          el.addEventListener('load', function() {
+            var nameLang = el.querySelector('.fs-person-vitals__name').getAttribute('lang');
+            expect(nameLang).to.equal('und-Hani');
+            done();
+          });
+          el.pid = '9FSG–WFM';
+        });
+        
+        it('should always be english on the pid', function(done) {
+          el.addEventListener('load', function() {
+            var nameLang = el.querySelector('.fs-person-details__id').getAttribute('lang');
+            expect(nameLang).to.equal('en');
+            done();
+          });
+          el.pid = '9FSG–WFM';
+        });
+        
+        it('should always be english on the pid', function(done) {
+          el.addEventListener('load', function() {
+            var nameLang = el.querySelector('.fs-person-details__id').getAttribute('lang');
+            expect(nameLang).to.not.equal('und-Hani');
+            done();
+          });
+          el.pid = '9FSG–WFM';
+        });
+        
+        it('should add a title attribute to the overall element', function(done) {
+          el.addEventListener('load', function() {
+            var personTitle = el.hasAttribute('title');
+            expect(personTitle).to.be.true;
+            done();
+          });
+          el.pid = '9FSG–WFM';
+        });
+        
+        it('should display 鮑昌夫人\n0730–Deceased • 9FSG–WFM as the title attribute', function(done) {
+          el.addEventListener('load', function() {
+            var personTitle = el.getAttribute('title');
+            var title = '鮑昌夫人\n0730–Deceased • 9FSG–WFM';
+            expect(personTitle).to.equal(title);
+            done();
+          });
+          el.pid = '9FSG–WFM';
+        });
+      });
+
+    describe('invalid data', function() {
+        this.timeout(2000);
+        var el;
+        beforeEach(function() {
+          el = document.createElement('fs-person');
+        });
+      
+        describe('Empty Object', function() {
+          it('should fire an error', function(done) {
+            el.addEventListener('error', function() {
+              assert(true);
+              done();
+            });
+            el.object = '{}';
+          });
+        });
+      
+        describe('Bad Object', function() {
+          it('should fire an error', function(done) {
+            el.addEventListener('error', function() {
+              assert(true);
+              done();
+            });
+            el.object = '{"Bree":"Awesome","Emily":"Also Awesome"}';
+          });
+        });
+      
+        describe('Not an Object', function(done) {
+          it('should fire an error', function(done) {
+            el.addEventListener('error', function() {
+              assert(true);
+              done();
+            });
+            el.object = 'weeee';
+          });
+        });
+      
+        describe('Pid looks like Pid but is invalid', function() {
+          beforeEach(function() {
+            fetchMock.get('/tf/person/1234-123', 404);
+          });
+          afterEach(function() {
+            fetchMock.restore();
+          });
+          it('should fire an error', function(done) {
+            el.addEventListener('error', function() {
+              assert(true);
+              done();
+            });
+            el.pid = '1234-123';
+          });
+          it('should display the pid passed in', function(done) {
+            el.addEventListener('load', function() {
+              var pid = el.querySelector('.fs-person-details__id').innerHTML;
+              expect(pid).to.equal('1234–123');
+              done();
+            });
+            el.pid = '1234-123';
+          });
+        });
+      
+        describe('Pid does not look like Pid', function() {
+          beforeEach(function() {
+            fetchMock.get('/tf/person/not-a-pid', 400);
+          });
+          afterEach(function() {
+            fetchMock.restore();
+          });
+          
+          it('should fire an error', function(done) {
+            el.addEventListener('error', function() {
+              assert(true);
+              done();
+            });
+            el.pid = 'not-a-pid';
+          });
+          
+          it('should display the pid passed in', function(done) {
+            el.addEventListener('load', function() {
+              var pid = el.querySelector('.fs-person-details__id').innerHTML;
+              expect(pid).to.equal('not–a–pid');
+              done();
+            });
+            el.pid = 'not-a-pid';
+          });
+        });
+      });
+
+  </script>
+</body>
+</html>
