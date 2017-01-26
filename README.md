@@ -3,6 +3,7 @@
 `fs-person` is a FamilySearch web component that displays a person's name, lifespan, and person id (PID). By default, the element displays the person's full name on one line, and their vital information on the next line. Their vital information is displayed with the lifespan first and the PID second, with a dot separating them.
 
 Example:
+
 ![fs person default display](http://i64.tinypic.com/33nj7l2.png)
 
 The component retrieves the person's data either through the `pid` or the `object` attribute that the consumer specified on the element. If both attributes are included on the element, it will default to using the `pid`.
